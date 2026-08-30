@@ -1504,15 +1504,14 @@
       if (fnName === 'getShareholderInfo') {
         const shId = argsArray ? argsArray[0] : '';
         fetchShareholderFromGviz(shId, function(res) {
-          if (res && res.found) {
-            if (successCb) successCb(res);
-          } else {
-            if (gasApiUrl && gasApiUrl.startsWith('http')) {
-              tryAppsScriptApi(fnName, argsArray, successCb, function(err) {
-                if (successCb) successCb(res || { found: false, message: 'Share Number "' + shId + '" not found in Google Sheet Shareholders tab.' });
-              });
+          if (successCb) {
+            if (res && res.found) {
+              successCb(res);
             } else {
-              if (successCb) successCb(res || { found: false, message: 'Share Number "' + shId + '" not found in Google Sheet Shareholders tab.' });
+              successCb({
+                found: false,
+                message: 'Shareholder ID "' + shId + '" not found in Google Sheet database.'
+              });
             }
           }
         });
@@ -2087,7 +2086,7 @@
           setBtnBusy(btn, false);
 
           if (!result || !result.found) {
-            showAlert((result && result.message) || 'Share Number "' + shareholderId + '" not found in Google Sheet Shareholders tab.', 'error');
+            showAlert('Shareholder ID "' + shareholderId + '" not found in Google Sheet database.', 'error');
             return;
           }
 
