@@ -2,11 +2,7 @@
  * SHREE BHEEMASHANKAR S S K N., MARAGUR - SUGAR ALLOTMENT SYSTEM
  * Google Apps Script Backend (Code.gs) v36.0 - STRICT EXACT UNIQUE ID ENGINE
  * 
- * Instructions:
- * 1. Open your Google Spreadsheet (ID: 1vy1AtjovBDwPNGxBJfE0PvwfddNe7XUK_-tf5X0ychQ)
- * 2. Click Extensions -> Apps Script
- * 3. Replace all existing code in Code.gs with this code.
- * 4. Click Deploy -> New deployment -> Select 'Web app' -> Execute as: 'Me', Who has access: 'Anyone'.
+ * Connected Spreadsheet ID: 1vy1AtjovBDwPNGxBJfE0PvwfddNe7XUK_-tf5X0ychQ
  */
 
 const SPREADSHEET_ID = "1vy1AtjovBDwPNGxBJfE0PvwfddNe7XUK_-tf5X0ychQ";
