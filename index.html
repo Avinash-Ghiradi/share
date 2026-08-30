@@ -8,11 +8,11 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="theme-color" content="#3B82F6">
-  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v38.0</title>
+  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v40.0</title>
 
   <script>
     (function() {
-      var BUILD_VERSION = "SAT_V38.0_SYMBOL_ID_GVIZ_AND_APPS_SCRIPT_ENGINE";
+      var BUILD_VERSION = "SAT_V40.0_RAW_CSV_STREAM_ENGINE_100PCT_ACCURACY";
       try {
         var lastVer = localStorage.getItem("sat_app_build_ver");
         if (lastVer !== BUILD_VERSION) {
@@ -466,7 +466,7 @@
       
       <!-- VERSION CHIP -->
       <div class="absolute top-3 right-4 bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-extrabold text-blue-100 border border-white/30">
-        v38.0 Live
+        v40.0 Live
       </div>
 
       <!-- LOGO + TITLE -->
@@ -799,7 +799,7 @@
     }
 
     /**
-     * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v38.0
+     * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v40.0
      * Enforces 100% exact string equality (case-insensitive, whitespace-cleaned).
      * Typing '1' ONLY matches exact ID '1' (NOT '*1', '#1', '10', '12', etc.).
      * Typing '*1' ONLY matches exact ID '*1'.
@@ -1375,9 +1375,32 @@
       });
     }
 
+    function parseCsvLine(text) {
+      let p = '', c = '', inQuotes = false;
+      let row = [];
+      for (let i = 0; i < text.length; i++) {
+        c = text[i];
+        if (c === '"') {
+          if (inQuotes && text[i+1] === '"') {
+            p += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (c === ',' && !inQuotes) {
+          row.push(p);
+          p = '';
+        } else {
+          p += c;
+        }
+      }
+      row.push(p);
+      return row;
+    }
+
     /* ----------------------------------------------------
-       STRICT TARGETED SHAREHOLDER FETCH ENGINE v38.0
-       Enforces 100% exact string equality. Does NOT take contained numbers!
+       STRICT TARGETED SHAREHOLDER FETCH ENGINE v40.0
+       Enforces 100% exact string equality via Raw CSV Stream Engine.
     ---------------------------------------------------- */
     function fetchShareholderFromGviz(shareholderId, callback) {
       const rawTarget = String(shareholderId || '').trim();
@@ -1386,15 +1409,85 @@
         return;
       }
 
-      fetchAllDatabaseRows('Shareholders', function(rows) {
-        if (!rows || rows.length === 0) {
-          fetchAllDatabaseRows('Shareholder', function(fallbackRows) {
-            processShareholderRows(fallbackRows || []);
-          });
-          return;
-        }
-        processShareholderRows(rows);
-      });
+      // Method 1: Fetch Raw CSV Export Stream (Preserves all 17,158+ rows with special symbols *3277, &24, #101)
+      const csvUrl = 'https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/export?format=csv&gid=0&nocache=' + Date.now();
+
+      fetch(csvUrl)
+        .then(res => res.text())
+        .then(csvText => {
+          if (!csvText || csvText.length < 10) {
+            fallbackToGvizMultiPage();
+            return;
+          }
+
+          const lines = csvText.split(/\r?\n/);
+          let exactMatch = null;
+
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) continue;
+            const r = parseCsvLine(line);
+            if (!r || r.length === 0) continue;
+
+            const cellVal = String(r[0] || '').trim();
+            if (!cellVal) continue;
+
+            if (scoreIdMatch(rawTarget, cellVal) === 100) {
+              exactMatch = r;
+              break;
+            }
+          }
+
+          if (exactMatch) {
+            const matchedIdVal = String(exactMatch[0] || '').trim();
+            let matchedName = String(exactMatch[1] || '').trim();
+            let matchedShares = 1;
+
+            if (exactMatch[4] !== undefined && exactMatch[4] !== null && /^\d+$/.test(String(exactMatch[4]).trim())) {
+              matchedShares = parseInt(String(exactMatch[4]).trim(), 10);
+            }
+
+            if (!matchedName || /^\d+$/.test(matchedName)) {
+              for (let j = 1; j < exactMatch.length; j++) {
+                const val = String(exactMatch[j] || '').trim();
+                if (val && val.length > 1 && !/^\d+$/.test(val)) {
+                  matchedName = val;
+                  break;
+                }
+              }
+            }
+
+            if (!matchedName) matchedName = 'Shareholder ' + matchedIdVal;
+            const hasReceivedInLocal = isShareholderReceivedLocal(matchedIdVal);
+
+            callback({
+              found: true,
+              id: matchedIdVal,
+              name: matchedName,
+              shareQuantity: matchedShares > 0 ? matchedShares : 1,
+              eligible: !hasReceivedInLocal,
+              hasReceived: hasReceivedInLocal
+            });
+            return;
+          }
+
+          fallbackToGvizMultiPage();
+        })
+        .catch(err => {
+          fallbackToGvizMultiPage();
+        });
+
+      function fallbackToGvizMultiPage() {
+        fetchAllDatabaseRows('Shareholders', function(rows) {
+          if (!rows || rows.length === 0) {
+            fetchAllDatabaseRows('Shareholder', function(fallbackRows) {
+              processShareholderRows(fallbackRows || []);
+            });
+            return;
+          }
+          processShareholderRows(rows);
+        });
+      }
 
       function processShareholderRows(rows) {
         if (!rows || rows.length === 0) {
@@ -1432,7 +1525,7 @@
 
           if (score === 100) {
             exactMatch = { row: r, idColIdx: idColIdx, cellVal: cellVal };
-            break; // Found 100% exact match!
+            break;
           }
         }
 
