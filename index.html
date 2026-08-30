@@ -8,11 +8,11 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="theme-color" content="#3B82F6">
-  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v42.0</title>
+  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v43.0</title>
 
   <script>
     (function() {
-      var BUILD_VERSION = "SAT_V42.0_FULL_RESULTS_SCREENSHOT_UI_ENGINE";
+      var BUILD_VERSION = "SAT_V43.0_RESPONSIVE_DYNAMIC_WIDE_LAYOUT_ENGINE";
       try {
         var lastVer = localStorage.getItem("sat_app_build_ver");
         if (lastVer !== BUILD_VERSION) {
@@ -458,15 +458,15 @@
   </div>
 
 
-  <!-- CENTERED MAIN CONTAINER (max-w-2xl) -->
-  <div class="max-w-2xl mx-auto px-4 sm:px-6 pt-5 sm:pt-7 space-y-4">
+  <!-- CENTERED MAIN CONTAINER -->
+  <div id="mainAppContainer" class="max-w-2xl mx-auto px-4 sm:px-6 pt-5 sm:pt-7 space-y-4 transition-all duration-300">
 
     <!-- HEADER BANNER -->
     <header class="header-banner-bg text-white rounded-3xl p-5 sm:p-6 shadow-xl text-center space-y-3.5 relative">
       
       <!-- VERSION CHIP -->
       <div class="absolute top-3 right-4 bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-extrabold text-blue-100 border border-white/30">
-        v42.0 Live
+        v43.0 Live
       </div>
 
       <!-- LOGO + TITLE -->
@@ -684,7 +684,7 @@
     </div>
 
 
-    <!-- ALLOTMENT DETAILS LEDGER TAB VIEW (v42.0 MATCHING SCREENSHOTS) -->
+    <!-- ALLOTMENT DETAILS LEDGER TAB VIEW (v43.0 MATCHING SCREENSHOTS) -->
     <div id="allotmentsTabView" class="card-modern bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-5">
       
       <!-- RESULTS HEADER BANNER -->
@@ -705,37 +705,37 @@
         </div>
       </div>
 
-      <!-- 6 SUMMARY STAT CARDS GRID -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5">
+      <!-- 6 SUMMARY STAT CARDS GRID (FIXED NO OVERLAP & PERFECT FONT SIZES) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         
-        <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
-          <div id="statRecipients" class="text-xl sm:text-2xl font-extrabold text-slate-800">0</div>
-          <div class="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider">Recipients</div>
+        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-center flex flex-col justify-between items-center min-h-[72px] shadow-2xs">
+          <div id="statRecipients" class="text-base sm:text-lg font-extrabold text-slate-800 whitespace-nowrap">0</div>
+          <div class="text-[10px] sm:text-[11px] text-slate-500 font-extrabold uppercase tracking-tight mt-1 text-center">Recipients</div>
         </div>
 
-        <div class="p-3 bg-rose-50/70 border border-rose-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
-          <div id="statPending" class="text-xl sm:text-2xl font-extrabold text-rose-600">17085</div>
-          <div class="text-[10px] text-rose-700 font-extrabold uppercase tracking-wider">Pending Shareholders</div>
+        <div class="p-3.5 bg-rose-50/70 border border-rose-200 rounded-2xl text-center flex flex-col justify-between items-center min-h-[72px] shadow-2xs">
+          <div id="statPending" class="text-base sm:text-lg font-extrabold text-rose-600 whitespace-nowrap">17085</div>
+          <div class="text-[10px] sm:text-[11px] text-rose-700 font-extrabold uppercase tracking-tight mt-1 text-center">Pending Shareholders</div>
         </div>
 
-        <div class="p-3 bg-blue-50/70 border border-blue-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
-          <div id="statSugarAllotted" class="text-xl sm:text-2xl font-extrabold text-blue-700">0 kg</div>
-          <div class="text-[10px] text-blue-700 font-extrabold uppercase tracking-wider">Sugar Allotted</div>
+        <div class="p-3.5 bg-blue-50/70 border border-blue-200 rounded-2xl text-center flex flex-col justify-between items-center min-h-[72px] shadow-2xs">
+          <div id="statSugarAllotted" class="text-base sm:text-lg font-extrabold text-blue-700 whitespace-nowrap">0 kg</div>
+          <div class="text-[10px] sm:text-[11px] text-blue-700 font-extrabold uppercase tracking-tight mt-1 text-center">Sugar Allotted</div>
         </div>
 
-        <div class="p-3 bg-indigo-50/70 border border-indigo-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
-          <div id="statTotalBilled" class="text-xl sm:text-2xl font-extrabold text-indigo-700">Rs 0.00</div>
-          <div class="text-[10px] text-indigo-700 font-extrabold uppercase tracking-wider">Total Billed</div>
+        <div class="p-3.5 bg-indigo-50/70 border border-indigo-200 rounded-2xl text-center flex flex-col justify-between items-center min-h-[72px] shadow-2xs">
+          <div id="statTotalBilled" class="text-sm sm:text-base font-extrabold text-indigo-700 whitespace-nowrap">Rs 0.00</div>
+          <div class="text-[10px] sm:text-[11px] text-indigo-700 font-extrabold uppercase tracking-tight mt-1 text-center">Total Billed</div>
         </div>
 
-        <div class="p-3 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
-          <div id="statTotalCollected" class="text-xl sm:text-2xl font-extrabold text-emerald-700">Rs 0.00</div>
-          <div class="text-[10px] text-emerald-700 font-extrabold uppercase tracking-wider">Total Collected</div>
+        <div class="p-3.5 bg-emerald-50/70 border border-emerald-200 rounded-2xl text-center flex flex-col justify-between items-center min-h-[72px] shadow-2xs">
+          <div id="statTotalCollected" class="text-sm sm:text-base font-extrabold text-emerald-700 whitespace-nowrap">Rs 0.00</div>
+          <div class="text-[10px] sm:text-[11px] text-emerald-700 font-extrabold uppercase tracking-tight mt-1 text-center">Total Collected</div>
         </div>
 
-        <div class="p-3 bg-amber-50/70 border border-amber-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
-          <div id="statBalanceOutstanding" class="text-xl sm:text-2xl font-extrabold text-amber-600">Rs 0.00</div>
-          <div class="text-[10px] text-amber-700 font-extrabold uppercase tracking-wider">Balance Outstanding</div>
+        <div class="p-3.5 bg-amber-50/70 border border-amber-200 rounded-2xl text-center flex flex-col justify-between items-center min-h-[72px] shadow-2xs">
+          <div id="statBalanceOutstanding" class="text-sm sm:text-base font-extrabold text-amber-600 whitespace-nowrap">Rs 0.00</div>
+          <div class="text-[10px] sm:text-[11px] text-amber-700 font-extrabold uppercase tracking-tight mt-1 text-center">Balance Outstanding</div>
         </div>
 
       </div>
@@ -782,17 +782,17 @@
       <!-- ALLOTMENT TABLE -->
       <div class="overflow-x-auto border border-slate-200 rounded-2xl shadow-xs bg-white">
         <table class="w-full text-left text-xs sm:text-sm border-collapse">
-          <thead class="bg-slate-100/90 text-slate-700 font-bold uppercase tracking-wider text-[10px] sm:text-[11px] border-b border-slate-200">
+          <thead class="bg-slate-100/90 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
             <tr>
-              <th class="p-3">Receipt #</th>
-              <th class="p-3">Shareholder ID</th>
-              <th class="p-3">Name</th>
-              <th class="p-3">Quantity</th>
-              <th class="p-3">Total</th>
-              <th class="p-3">Paid</th>
-              <th class="p-3">Balance</th>
-              <th class="p-3">Received By</th>
-              <th class="p-3 text-center">Action</th>
+              <th class="p-3 whitespace-nowrap">Receipt #</th>
+              <th class="p-3 whitespace-nowrap">Shareholder ID</th>
+              <th class="p-3 whitespace-nowrap">Name</th>
+              <th class="p-3 whitespace-nowrap">Quantity</th>
+              <th class="p-3 whitespace-nowrap">Total</th>
+              <th class="p-3 whitespace-nowrap">Paid</th>
+              <th class="p-3 whitespace-nowrap">Balance</th>
+              <th class="p-3 whitespace-nowrap">Received By</th>
+              <th class="p-3 text-center whitespace-nowrap">Action</th>
             </tr>
           </thead>
           <tbody id="allotmentLedgerTableBody" class="divide-y divide-slate-100 font-medium text-slate-800">
@@ -852,7 +852,7 @@
     }
 
     /**
-     * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v42.0
+     * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v43.0
      * Enforces 100% exact string equality (case-insensitive, whitespace-cleaned).
      * Typing '1' ONLY matches exact ID '1' (NOT '*1', '#1', '10', '12', etc.).
      * Typing '*1' ONLY matches exact ID '*1'.
@@ -1206,10 +1206,15 @@
     function switchNavTab(tabName) {
       const distView = document.getElementById('distributionView');
       const allView = document.getElementById('allotmentsTabView');
+      const mainContainer = document.getElementById('mainAppContainer');
 
       if (tabName === 'allotmentsTab') {
         distView.style.display = 'none';
         allView.style.display = 'block';
+        if (mainContainer) {
+          mainContainer.classList.remove('max-w-2xl');
+          mainContainer.classList.add('max-w-5xl');
+        }
         if (currentUser && document.getElementById('resultsUserBadgeName')) {
           document.getElementById('resultsUserBadgeName').textContent = currentUser.name + ' (' + (currentUser.role || 'Cashier') + ')';
         }
@@ -1217,6 +1222,10 @@
       } else {
         allView.style.display = 'none';
         distView.style.display = 'block';
+        if (mainContainer) {
+          mainContainer.classList.remove('max-w-5xl');
+          mainContainer.classList.add('max-w-2xl');
+        }
       }
     }
 
@@ -1567,7 +1576,7 @@
     }
 
     /* ----------------------------------------------------
-       STRICT TARGETED SHAREHOLDER FETCH ENGINE v42.0
+       STRICT TARGETED SHAREHOLDER FETCH ENGINE v43.0
        Enforces 100% exact string equality via Raw CSV Stream Engine.
     ---------------------------------------------------- */
     function fetchShareholderFromGviz(shareholderId, callback) {
