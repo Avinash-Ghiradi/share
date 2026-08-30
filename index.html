@@ -8,11 +8,11 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="theme-color" content="#3B82F6">
-  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v41.0</title>
+  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v42.0</title>
 
   <script>
     (function() {
-      var BUILD_VERSION = "SAT_V41.0_CLEAN_UI_NO_SUBTITLE_HELP_TEXT";
+      var BUILD_VERSION = "SAT_V42.0_FULL_RESULTS_SCREENSHOT_UI_ENGINE";
       try {
         var lastVer = localStorage.getItem("sat_app_build_ver");
         if (lastVer !== BUILD_VERSION) {
@@ -466,7 +466,7 @@
       
       <!-- VERSION CHIP -->
       <div class="absolute top-3 right-4 bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-extrabold text-blue-100 border border-white/30">
-        v41.0 Live
+        v42.0 Live
       </div>
 
       <!-- LOGO + TITLE -->
@@ -684,48 +684,99 @@
     </div>
 
 
-    <!-- ALLOTMENT DETAILS LEDGER TAB VIEW -->
-    <div id="allotmentsTabView" class="card-modern bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-        <div class="flex items-center space-x-3.5">
-          <div class="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xl shadow-xs">
-            <i class="fas fa-table"></i>
-          </div>
-          <div>
-            <h2 class="text-xl font-extrabold text-slate-800">Allotment Results & Ledger</h2>
-            <p class="text-xs text-slate-400 font-medium">Live distribution transactions & shareholder unblock manager</p>
-          </div>
+    <!-- ALLOTMENT DETAILS LEDGER TAB VIEW (v42.0 MATCHING SCREENSHOTS) -->
+    <div id="allotmentsTabView" class="card-modern bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-5">
+      
+      <!-- RESULTS HEADER BANNER -->
+      <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white rounded-2xl p-5 shadow-md text-center space-y-3">
+        <div class="flex items-center justify-center space-x-2 text-xl font-extrabold">
+          <i class="fas fa-list-alt"></i>
+          <span>Sugar Allotment Results</span>
         </div>
-        <div class="flex gap-2">
-          <button onclick="switchNavTab('distribution')" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition flex items-center gap-1">
-            <i class="fas fa-arrow-left"></i> <span>Back</span>
+        <div class="flex items-center justify-center space-x-2 text-xs bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full w-max mx-auto border border-white/30 font-semibold">
+          <i class="fas fa-user-circle text-blue-200"></i>
+          <span>Logged in as <strong id="resultsUserBadgeName">Cashier 1 (Cashier)</strong></span>
+          <button type="button" onclick="doLogout()" class="ml-2 font-bold text-rose-200 hover:text-white underline"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        <div class="pt-1">
+          <button type="button" onclick="switchNavTab('distribution')" class="px-4 py-2 bg-white/20 hover:bg-white/30 text-white font-bold text-xs rounded-xl border border-white/30 transition">
+            ← Back to Allotment
           </button>
-          <button onclick="renderAllotmentsLedgerTable()" class="px-3.5 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs rounded-xl border border-blue-200 transition flex items-center gap-1">
+        </div>
+      </div>
+
+      <!-- 6 SUMMARY STAT CARDS GRID -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5">
+        
+        <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
+          <div id="statRecipients" class="text-xl sm:text-2xl font-extrabold text-slate-800">0</div>
+          <div class="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider">Recipients</div>
+        </div>
+
+        <div class="p-3 bg-rose-50/70 border border-rose-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
+          <div id="statPending" class="text-xl sm:text-2xl font-extrabold text-rose-600">17085</div>
+          <div class="text-[10px] text-rose-700 font-extrabold uppercase tracking-wider">Pending Shareholders</div>
+        </div>
+
+        <div class="p-3 bg-blue-50/70 border border-blue-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
+          <div id="statSugarAllotted" class="text-xl sm:text-2xl font-extrabold text-blue-700">0 kg</div>
+          <div class="text-[10px] text-blue-700 font-extrabold uppercase tracking-wider">Sugar Allotted</div>
+        </div>
+
+        <div class="p-3 bg-indigo-50/70 border border-indigo-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
+          <div id="statTotalBilled" class="text-xl sm:text-2xl font-extrabold text-indigo-700">Rs 0.00</div>
+          <div class="text-[10px] text-indigo-700 font-extrabold uppercase tracking-wider">Total Billed</div>
+        </div>
+
+        <div class="p-3 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
+          <div id="statTotalCollected" class="text-xl sm:text-2xl font-extrabold text-emerald-700">Rs 0.00</div>
+          <div class="text-[10px] text-emerald-700 font-extrabold uppercase tracking-wider">Total Collected</div>
+        </div>
+
+        <div class="p-3 bg-amber-50/70 border border-amber-200/80 rounded-2xl text-center space-y-0.5 shadow-2xs">
+          <div id="statBalanceOutstanding" class="text-xl sm:text-2xl font-extrabold text-amber-600">Rs 0.00</div>
+          <div class="text-[10px] text-amber-700 font-extrabold uppercase tracking-wider">Balance Outstanding</div>
+        </div>
+
+      </div>
+
+      <!-- ALL TRANSACTIONS CONTROL BAR -->
+      <div class="space-y-3 pt-2">
+        <div class="flex items-center space-x-2 font-extrabold text-slate-800 text-base sm:text-lg">
+          <i class="fas fa-list-ul text-blue-600"></i>
+          <span>All Transactions</span>
+        </div>
+
+        <!-- SEARCH + REFRESH -->
+        <div class="flex gap-2">
+          <div class="relative flex-1">
+            <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input type="text" id="ledgerSearchInput" placeholder="Search by name, shareholder ID, or receipt number..." onkeyup="filterLedgerTable()" class="input-modern !pl-9 !min-h-[44px] !text-xs">
+          </div>
+          <button type="button" onclick="renderAllotmentsLedgerTable()" class="px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow-xs transition flex items-center gap-1.5 flex-shrink-0">
             <i class="fas fa-sync-alt"></i> <span>Refresh</span>
           </button>
         </div>
-      </div>
 
-      <!-- LEDGER SUMMARY STATS CARDS -->
-      <div class="grid grid-cols-3 gap-3">
-        <div class="p-3.5 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl text-center space-y-1">
-          <div class="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider">Allotments</div>
-          <div id="statTotalCount" class="text-2xl font-extrabold text-emerald-700">0</div>
+        <!-- DATE + CASHIER FILTER + GENERATE PDF -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <div>
+            <input type="date" id="ledgerDateInput" onchange="filterLedgerTable()" class="input-modern !min-h-[44px] !text-xs !px-3">
+          </div>
+          <div>
+            <select id="ledgerUserSelect" onchange="filterLedgerTable()" class="input-modern !min-h-[44px] !text-xs !px-3 font-semibold">
+              <option value="All Users">All Users</option>
+              <option value="Admin User (Admin)">Admin User (Admin)</option>
+              <option value="Cashier 1 (Cashier)" selected>Cashier 1 (Cashier)</option>
+              <option value="Cashier 2 (Cashier)">Cashier 2 (Cashier)</option>
+            </select>
+          </div>
+          <div>
+            <button type="button" onclick="generateTransactionsPdf()" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center justify-center gap-1.5">
+              <i class="fas fa-file-pdf text-sm"></i> <span>Generate PDF</span>
+            </button>
+          </div>
         </div>
-        <div class="p-3.5 bg-blue-50/70 border border-blue-200/80 rounded-2xl text-center space-y-1">
-          <div class="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider">Sugar Distributed</div>
-          <div id="statTotalSugar" class="text-2xl font-extrabold text-blue-700">0 kg</div>
-        </div>
-        <div class="p-3.5 bg-purple-50/70 border border-purple-200/80 rounded-2xl text-center space-y-1">
-          <div class="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider">Revenue</div>
-          <div id="statTotalRevenue" class="text-2xl font-extrabold text-purple-700">Rs 0</div>
-        </div>
-      </div>
-
-      <!-- SEARCH BAR IN LEDGER -->
-      <div class="relative">
-        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-        <input type="text" id="ledgerSearchInput" placeholder="Search Share Number (*1, #1, 1), Name or Receipt Number..." onkeyup="filterLedgerTable()" class="input-modern pl-11">
       </div>
 
       <!-- ALLOTMENT TABLE -->
@@ -733,18 +784,20 @@
         <table class="w-full text-left text-xs sm:text-sm border-collapse">
           <thead class="bg-slate-100/90 text-slate-700 font-bold uppercase tracking-wider text-[10px] sm:text-[11px] border-b border-slate-200">
             <tr>
-              <th class="p-3.5">Receipt #</th>
-              <th class="p-3.5">Share #</th>
-              <th class="p-3.5">Name</th>
-              <th class="p-3.5">Quantity</th>
-              <th class="p-3.5">Total (Rs)</th>
-              <th class="p-3.5">Paid (Rs)</th>
-              <th class="p-3.5 text-center">Action</th>
+              <th class="p-3">Receipt #</th>
+              <th class="p-3">Shareholder ID</th>
+              <th class="p-3">Name</th>
+              <th class="p-3">Quantity</th>
+              <th class="p-3">Total</th>
+              <th class="p-3">Paid</th>
+              <th class="p-3">Balance</th>
+              <th class="p-3">Received By</th>
+              <th class="p-3 text-center">Action</th>
             </tr>
           </thead>
           <tbody id="allotmentLedgerTableBody" class="divide-y divide-slate-100 font-medium text-slate-800">
             <tr>
-              <td colspan="7" class="p-6 text-center text-slate-400 font-semibold">Loading allotment details...</td>
+              <td colspan="9" class="p-6 text-center text-slate-400 font-semibold">Loading allotment details...</td>
             </tr>
           </tbody>
         </table>
@@ -799,7 +852,7 @@
     }
 
     /**
-     * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v41.0
+     * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v42.0
      * Enforces 100% exact string equality (case-insensitive, whitespace-cleaned).
      * Typing '1' ONLY matches exact ID '1' (NOT '*1', '#1', '10', '12', etc.).
      * Typing '*1' ONLY matches exact ID '*1'.
@@ -1157,6 +1210,9 @@
       if (tabName === 'allotmentsTab') {
         distView.style.display = 'none';
         allView.style.display = 'block';
+        if (currentUser && document.getElementById('resultsUserBadgeName')) {
+          document.getElementById('resultsUserBadgeName').textContent = currentUser.name + ' (' + (currentUser.role || 'Cashier') + ')';
+        }
         renderAllotmentsLedgerTable();
       } else {
         allView.style.display = 'none';
@@ -1178,7 +1234,6 @@
       if (!shId) return false;
       const receivedList = JSON.parse(safeStorageGet('sat_received_ids') || '[]');
       for (let rec of receivedList) {
-        // Enforce STRICT EXACT match ONLY
         if (scoreIdMatch(shId, rec) === 100) return true;
       }
 
@@ -1203,7 +1258,6 @@
     function unblockShareholder(shId) {
       if (!shId) return;
       let receivedList = JSON.parse(safeStorageGet('sat_received_ids') || '[]');
-      // Filter out ONLY exact match so unblocking '*1' does not unblock '1' or '#1'
       receivedList = receivedList.filter(id => scoreIdMatch(shId, id) !== 100);
       safeStorageSet('sat_received_ids', JSON.stringify(receivedList));
 
@@ -1285,6 +1339,72 @@
       });
     }
 
+    function generateTransactionsPdf() {
+      const recipients = document.getElementById('statRecipients') ? document.getElementById('statRecipients').textContent : '0';
+      const pending = document.getElementById('statPending') ? document.getElementById('statPending').textContent : '0';
+      const sugar = document.getElementById('statSugarAllotted') ? document.getElementById('statSugarAllotted').textContent : '0 kg';
+      const billed = document.getElementById('statTotalBilled') ? document.getElementById('statTotalBilled').textContent : 'Rs 0.00';
+      const collected = document.getElementById('statTotalCollected') ? document.getElementById('statTotalCollected').textContent : 'Rs 0.00';
+      const balance = document.getElementById('statBalanceOutstanding') ? document.getElementById('statBalanceOutstanding').textContent : 'Rs 0.00';
+      const selectedUser = document.getElementById('ledgerUserSelect') ? document.getElementById('ledgerUserSelect').value : 'All Users';
+      const selectedDate = document.getElementById('ledgerDateInput') && document.getElementById('ledgerDateInput').value ? document.getElementById('ledgerDateInput').value : 'All Dates';
+
+      const rows = Array.from(document.querySelectorAll('#allotmentLedgerTableBody tr'));
+      const validRows = rows.filter(tr => tr.style.display !== 'none' && tr.children.length >= 7);
+
+      let rowsHtml = '';
+      validRows.forEach(tr => {
+        rowsHtml += '<tr>' +
+          '<td>' + (tr.children[0]?.textContent || '') + '</td>' +
+          '<td>' + (tr.children[1]?.textContent || '') + '</td>' +
+          '<td>' + (tr.children[2]?.textContent || '') + '</td>' +
+          '<td>' + (tr.children[3]?.textContent || '') + '</td>' +
+          '<td>' + (tr.children[4]?.textContent || '') + '</td>' +
+          '<td>' + (tr.children[5]?.textContent || '') + '</td>' +
+          '<td>' + (tr.children[6]?.textContent || '') + '</td>' +
+          '<td>' + (tr.children[7]?.textContent || 'Cashier 1') + '</td>' +
+        '</tr>';
+      });
+
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        showAlert('Please allow popups to generate PDF report.', 'error');
+        return;
+      }
+
+      printWindow.document.write(
+        '<!DOCTYPE html><html><head><title>Sugar Allotment Results</title><style>' +
+        'body { font-family: sans-serif; padding: 20px; color: #0f172a; }' +
+        'h2 { text-align: center; color: #1d4ed8; margin-bottom: 2px; }' +
+        'h4 { text-align: center; color: #475569; margin-top: 0; }' +
+        '.meta { text-align: center; font-size: 11px; color: #64748b; margin-bottom: 15px; }' +
+        '.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px; }' +
+        '.stat-card { border: 1px solid #cbd5e1; padding: 8px; border-radius: 6px; text-align: center; background: #f8fafc; }' +
+        '.stat-val { font-size: 16px; font-weight: bold; color: #0f172a; margin-top: 2px; }' +
+        '.stat-lbl { font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: bold; }' +
+        'table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11px; }' +
+        'th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }' +
+        'th { background: #f1f5f9; text-transform: uppercase; font-size: 10px; }' +
+        '</style></head><body>' +
+        '<h2>Shree Bheemashankar S S K N., Maragur</h2>' +
+        '<h4>Sugar Allotment Results Report</h4>' +
+        '<div class="meta">Date: ' + selectedDate + ' | Cashier: ' + selectedUser + ' | Printed: ' + new Date().toLocaleString() + '</div>' +
+        '<div class="stats-grid">' +
+          '<div class="stat-card"><div class="stat-lbl">Recipients</div><div class="stat-val">' + recipients + '</div></div>' +
+          '<div class="stat-card"><div class="stat-lbl">Pending Shareholders</div><div class="stat-val">' + pending + '</div></div>' +
+          '<div class="stat-card"><div class="stat-lbl">Sugar Allotted</div><div class="stat-val">' + sugar + '</div></div>' +
+          '<div class="stat-card"><div class="stat-lbl">Total Billed</div><div class="stat-val">' + billed + '</div></div>' +
+          '<div class="stat-card"><div class="stat-lbl">Total Collected</div><div class="stat-val">' + collected + '</div></div>' +
+          '<div class="stat-card"><div class="stat-lbl">Balance Outstanding</div><div class="stat-val">' + balance + '</div></div>' +
+        '</div>' +
+        '<table><thead><tr><th>Receipt #</th><th>Shareholder ID</th><th>Name</th><th>Quantity</th><th>Total</th><th>Paid</th><th>Balance</th><th>Received By</th></tr></thead>' +
+        '<tbody>' + rowsHtml + '</tbody></table>' +
+        '<script>window.onload = function() { window.print(); }<\/script>' +
+        '</body></html>'
+      );
+      printWindow.document.close();
+    }
+
     function updateLedgerUI(localLedger, sheetTransactions) {
       const tbody = document.getElementById('allotmentLedgerTableBody');
       if (!tbody) return;
@@ -1294,13 +1414,14 @@
       (sheetTransactions || []).forEach(t => {
         const key = String(t.receiptNumber || t.id || Math.random());
         map.set(key, {
-          receiptNumber: t.receiptNumber || 'SLIP-GSHEET',
+          receiptNumber: t.receiptNumber || ('R' + Math.floor(1000 + Math.random() * 9000)),
           id: t.id || '-',
           name: t.name || 'Shareholder',
           quantity: parseFloat(t.quantity) || 0,
           totalAmount: parseFloat(t.totalAmount) || 0,
-          amountPaid: parseFloat(t.amountPaid) || 0,
-          date: t.date || 'Recorded'
+          amountPaid: parseFloat(t.amountPaid) !== undefined ? parseFloat(t.amountPaid) : (parseFloat(t.totalAmount) || 0),
+          receivedBy: t.receivedBy || 'Cashier 1',
+          date: t.date || ''
         });
       });
 
@@ -1308,70 +1429,117 @@
         const key = String(t.receiptNumber || t.shareholderId || Math.random());
         if (!map.has(key)) {
           map.set(key, {
-            receiptNumber: t.receiptNumber || 'SLIP-LOCAL',
+            receiptNumber: t.receiptNumber || 'SLIP-' + Math.floor(Date.now() / 1000),
             id: t.shareholderId || t.id || '-',
             name: t.receivedBy || t.name || 'Shareholder',
             quantity: parseFloat(t.quantity) || 0,
             totalAmount: parseFloat(t.totalAmount) || 0,
-            amountPaid: parseFloat(t.amountPaid) || 0,
-            date: t.date || 'Recent'
+            amountPaid: parseFloat(t.amountPaid) !== undefined ? parseFloat(t.amountPaid) : (parseFloat(t.totalAmount) || 0),
+            receivedBy: (currentUser && currentUser.name) ? currentUser.name : 'Cashier 1',
+            date: t.date || ''
           });
         }
       });
 
       const combined = Array.from(map.values());
 
+      let recipientsCount = combined.length;
+      let totalSugar = 0;
+      let totalBilled = 0;
+      let totalCollected = 0;
+      let balanceOutstanding = 0;
+
       if (combined.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="p-6 text-center text-slate-400 font-semibold"><i class="fas fa-inbox text-3xl mb-2 block text-slate-300"></i> No allotment records found in ledger.</td></tr>';
-        document.getElementById('statTotalCount').textContent = '0';
-        document.getElementById('statTotalSugar').textContent = '0 kg';
-        document.getElementById('statTotalRevenue').textContent = 'Rs 0';
-        return;
+        tbody.innerHTML = '<tr><td colspan="9" class="p-6 text-center text-slate-400 font-semibold"><i class="fas fa-inbox text-3xl mb-2 block text-slate-300"></i> No allotment records found in ledger.</td></tr>';
+      } else {
+        tbody.innerHTML = '';
+
+        combined.forEach(function(t) {
+          const qty = parseFloat(t.quantity) || 0;
+          const billed = parseFloat(t.totalAmount) || 0;
+          const paid = parseFloat(t.amountPaid) !== undefined ? parseFloat(t.amountPaid) : billed;
+          const bal = billed - paid;
+
+          totalSugar += qty;
+          totalBilled += billed;
+          totalCollected += paid;
+          balanceOutstanding += (bal > 0 ? bal : 0);
+
+          const shId = t.id || '-';
+          const shName = t.name || 'Shareholder';
+          const slipNo = t.receiptNumber || 'SLIP-LOCAL';
+          const cashier = t.receivedBy || 'Cashier 1';
+
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-blue-50/50 border-b border-slate-100 transition';
+          tr.dataset.user = cashier.toLowerCase();
+          tr.dataset.date = String(t.date || '');
+
+          tr.innerHTML = 
+            '<td class="p-3 font-mono font-bold text-blue-700 text-xs">' + slipNo + '</td>' +
+            '<td class="p-3 font-bold text-slate-800">' + shId + '</td>' +
+            '<td class="p-3 text-slate-800 font-medium">' + shName + '</td>' +
+            '<td class="p-3 font-bold text-slate-700">' + qty + ' kg</td>' +
+            '<td class="p-3 font-semibold text-slate-800">Rs ' + billed.toFixed(2) + '</td>' +
+            '<td class="p-3 font-semibold text-slate-800">Rs ' + paid.toFixed(2) + '</td>' +
+            '<td class="p-3 font-bold ' + (bal > 0 ? 'text-rose-600' : 'text-slate-500') + '">Rs ' + bal.toFixed(2) + '</td>' +
+            '<td class="p-3 text-slate-600 font-medium">' + cashier + '</td>' +
+            '<td class="p-3 text-center">' +
+              '<button type="button" onclick="unblockShareholderWithPin(\'' + shId + '\')" class="px-2.5 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold rounded-lg text-[10px] shadow-xs transition flex items-center justify-center gap-1 mx-auto">' +
+                '<i class="fas fa-unlock text-[9px]"></i> Unblock' +
+              '</button>' +
+            '</td>';
+          tbody.appendChild(tr);
+        });
       }
 
-      let totalSugar = 0;
-      let totalRevenue = 0;
-      tbody.innerHTML = '';
+      const TOTAL_SHAREHOLDERS_DATABASE = 17085;
+      const pendingCount = Math.max(0, TOTAL_SHAREHOLDERS_DATABASE - recipientsCount);
 
-      combined.forEach(function(t) {
-        const qty = parseFloat(t.quantity) || 0;
-        const rev = parseFloat(t.totalAmount) || 0;
-        totalSugar += qty;
-        totalRevenue += rev;
+      const elRecipients = document.getElementById('statRecipients');
+      if (elRecipients) elRecipients.textContent = recipientsCount;
 
-        const shId = t.id || '-';
-        const shName = t.name || 'Shareholder';
-        const slipNo = t.receiptNumber || 'SLIP-LOCAL';
-        const paid = t.amountPaid !== undefined ? t.amountPaid : rev;
+      const elPending = document.getElementById('statPending');
+      if (elPending) elPending.textContent = pendingCount;
 
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-blue-50/50 border-b border-slate-100 transition';
-        tr.innerHTML = 
-          '<td class="p-3.5 font-mono font-bold text-blue-700 text-xs">' + slipNo + '</td>' +
-          '<td class="p-3.5 font-bold text-slate-800">' + shId + '</td>' +
-          '<td class="p-3.5 text-slate-700 font-medium">' + shName + '</td>' +
-          '<td class="p-3.5 font-bold text-emerald-700">' + qty + ' kg</td>' +
-          '<td class="p-3.5 font-semibold">Rs ' + rev + '</td>' +
-          '<td class="p-3.5 text-slate-600">Rs ' + paid + '</td>' +
-          '<td class="p-3.5 text-center">' +
-            '<button type="button" onclick="unblockShareholderWithPin(\'' + shId + '\')" class="px-2.5 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold rounded-lg text-[10px] shadow-xs transition flex items-center justify-center gap-1 mx-auto">' +
-              '<i class="fas fa-unlock text-[9px]"></i> Unblock' +
-            '</button>' +
-          '</td>';
-        tbody.appendChild(tr);
-      });
+      const elSugar = document.getElementById('statSugarAllotted');
+      if (elSugar) elSugar.textContent = totalSugar + ' kg';
 
-      document.getElementById('statTotalCount').textContent = combined.length;
-      document.getElementById('statTotalSugar').textContent = totalSugar + ' kg';
-      document.getElementById('statTotalRevenue').textContent = 'Rs ' + totalRevenue;
+      const elBilled = document.getElementById('statTotalBilled');
+      if (elBilled) elBilled.textContent = 'Rs ' + totalBilled.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      const elCollected = document.getElementById('statTotalCollected');
+      if (elCollected) elCollected.textContent = 'Rs ' + totalCollected.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      const elBalance = document.getElementById('statBalanceOutstanding');
+      if (elBalance) elBalance.textContent = 'Rs ' + balanceOutstanding.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      filterLedgerTable();
     }
 
     function filterLedgerTable() {
-      const q = document.getElementById('ledgerSearchInput').value.toLowerCase();
+      const qInput = document.getElementById('ledgerSearchInput');
+      const q = qInput ? qInput.value.toLowerCase().trim() : '';
+
+      const uInput = document.getElementById('ledgerUserSelect');
+      const userFilter = uInput ? uInput.value.toLowerCase().trim() : 'all users';
+
+      const dInput = document.getElementById('ledgerDateInput');
+      const dateFilter = dInput ? dInput.value.trim() : '';
+
       const rows = document.querySelectorAll('#allotmentLedgerTableBody tr');
       rows.forEach(row => {
+        if (row.children.length < 7) return;
+
         const text = row.innerText.toLowerCase();
-        row.style.display = text.includes(q) ? '' : 'none';
+        const rowUser = (row.dataset.user || row.children[7]?.textContent || '').toLowerCase();
+        const rowDate = row.dataset.date || '';
+
+        let matchesSearch = !q || text.includes(q);
+        let matchesUser = (userFilter === 'all users') || rowUser.includes(userFilter.replace(/\s*\(.*?\)/g, '')) || userFilter.includes(rowUser);
+        let matchesDate = !dateFilter || rowDate.includes(dateFilter);
+
+        row.style.display = (matchesSearch && matchesUser && matchesDate) ? '' : 'none';
       });
     }
 
@@ -1399,7 +1567,7 @@
     }
 
     /* ----------------------------------------------------
-       STRICT TARGETED SHAREHOLDER FETCH ENGINE v41.0
+       STRICT TARGETED SHAREHOLDER FETCH ENGINE v42.0
        Enforces 100% exact string equality via Raw CSV Stream Engine.
     ---------------------------------------------------- */
     function fetchShareholderFromGviz(shareholderId, callback) {
