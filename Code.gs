@@ -1,8 +1,12 @@
 /**
  * SHREE BHEEMASHANKAR S S K N., MARAGUR - SUGAR ALLOTMENT SYSTEM
- * Google Apps Script Backend (Code.gs) v36.0 - STRICT EXACT UNIQUE ID ENGINE
+ * Google Apps Script Backend (Code.gs) v30.0
  * 
- * Connected Spreadsheet ID: 1vy1AtjovBDwPNGxBJfE0PvwfddNe7XUK_-tf5X0ychQ
+ * Instructions:
+ * 1. Open your Google Spreadsheet (ID: 1vy1AtjovBDwPNGxBJfE0PvwfddNe7XUK_-tf5X0ychQ)
+ * 2. Click Extensions -> Apps Script
+ * 3. Replace all existing code in Code.gs with this code.
+ * 4. Click Deploy -> New deployment -> Select 'Web app' -> Execute as: 'Me', Who has access: 'Anyone'.
  */
 
 const SPREADSHEET_ID = "1vy1AtjovBDwPNGxBJfE0PvwfddNe7XUK_-tf5X0ychQ";
@@ -41,7 +45,7 @@ function doGet(e) {
       try { shData = JSON.parse(shDataStr); } catch(err) { shData = {}; }
       result = addShareholder(shData);
     } else {
-      result = { success: true, message: 'Sugar Allotment Backend v36.0 Online' };
+      result = { success: true, message: 'Sugar Allotment Backend v30.0 Online' };
     }
   } catch (err) {
     result = { success: false, message: 'Error: ' + err.toString() };
@@ -59,14 +63,9 @@ function doGet(e) {
 }
 
 /**
- * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v36.0
- * Enforces 100% exact string equality (case-insensitive, whitespace-cleaned).
- * Typing '1' ONLY matches exact ID '1' (NOT '*1', '#1', '10', '12', etc.).
- * Typing '*1' ONLY matches exact ID '*1'.
- * Typing '#1' ONLY matches exact ID '#1'.
- * Typing '*2' ONLY matches exact ID '*2'.
- * Typing '#2' ONLY matches exact ID '#2'.
- * NO partial, contained, or substring matching.
+ * EXACT UNIQUE ID MATCHING ENGINE v30.0
+ * Enforces exact string equality (case-insensitive, space-cleaned).
+ * Typing '2' ONLY matches exact ID '2', NOT '*2', '&2', '20', '22', etc.
  */
 function scoreIdMatch(targetRaw, cellRaw) {
   if (targetRaw === undefined || targetRaw === null || cellRaw === undefined || cellRaw === null) return 0;
@@ -83,7 +82,7 @@ function scoreIdMatch(targetRaw, cellRaw) {
 }
 
 /**
- * Searches across tabs in Google Spreadsheet & returns STRICT EXACT shareholder match
+ * Searches across ALL tabs in Google Spreadsheet & returns EXACT unique shareholder match
  */
 function getShareholderInfo(shId) {
   const ss = getSpreadsheet();
@@ -104,36 +103,23 @@ function getShareholderInfo(shId) {
     const data = sheet.getDataRange().getValues();
     if (!data || data.length === 0) continue;
 
-    let idColIdx = 0;
-    let startRow = 0;
-
-    if (data.length > 0 && data[0]) {
-      for (let c = 0; c < data[0].length; c++) {
-        const h = String(data[0][c] || '').toLowerCase().trim();
-        if (h.includes('shareholder id') || h.includes('share no') || h.includes('sh_id') || h === 'id') {
-          idColIdx = c;
-          startRow = 1;
-          break;
-        }
-      }
-      if (startRow === 0 && (String(data[0][idColIdx]).toLowerCase().includes('id') || String(data[0][idColIdx]).toLowerCase().includes('share'))) {
-        startRow = 1;
-      }
-    }
-
-    for (let i = startRow; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       const row = data[i];
       if (!row || row.length === 0) continue;
 
-      const cellVal = String(row[idColIdx] || row[0] || '').trim();
-      if (!cellVal) continue;
+      for (let j = 0; j < row.length; j++) {
+        const cellVal = String(row[j] || '').trim();
+        if (!cellVal) continue;
 
-      const score = scoreIdMatch(targetId, cellVal);
+        const score = scoreIdMatch(targetId, cellVal);
 
-      if (score === 100) {
-        exactMatch = { row: row, idColIdx: idColIdx, cellVal: cellVal };
-        break; // Found 100% exact match!
+        if (score === 100) {
+          exactMatch = { row: row, idColIdx: j, cellVal: cellVal };
+          break;
+        }
       }
+
+      if (exactMatch) break; // Found exact match!
     }
 
     if (exactMatch) break;
@@ -141,32 +127,31 @@ function getShareholderInfo(shId) {
 
   if (exactMatch) {
     const r = exactMatch.row;
+    const idColIdx = exactMatch.idColIdx;
     const matchedIdVal = exactMatch.cellVal;
 
-    let matchedName = String(r[1] || '').trim();
+    let matchedName = '';
     let matchedAddress = 'Maragur';
     let matchedCat = 'ಅ - वर्ग';
     let matchedShares = 1;
 
-    if (r[4] !== undefined && r[4] !== null && /^\d+$/.test(String(r[4]).trim())) {
-      matchedShares = parseInt(String(r[4]).trim(), 10);
-    }
-
     for (let k = 0; k < r.length; k++) {
-      if (k === exactMatch.idColIdx) continue;
+      if (k === idColIdx) continue;
       const val = String(r[k] || '').trim();
       if (!val) continue;
 
       if (val.includes('वर्ग') || val.includes('Class') || val.includes('Regular')) {
         matchedCat = val;
-      } else if (k !== 1 && !matchedName && val.length > 1 && !/^\d+$/.test(val)) {
+      } else if (/^\d+$/.test(val) && parseInt(val, 10) > 0 && parseInt(val, 10) <= 500) {
+        matchedShares = parseInt(val, 10);
+      } else if (!matchedName && val.length > 1 && !/^\d+$/.test(val)) {
         matchedName = val;
-      } else if (matchedName && matchedAddress === 'Maragur' && !/^\d+$/.test(val) && val !== matchedName && val !== matchedCat) {
+      } else if (matchedName && matchedAddress === 'Maragur' && !/^\d+$/.test(val)) {
         matchedAddress = val;
       }
     }
 
-    if (!matchedName || /^\d+$/.test(matchedName)) matchedName = 'Shareholder ' + matchedIdVal;
+    if (!matchedName) matchedName = 'Shareholder ' + matchedIdVal;
     const hasReceived = checkReceivedInAllotments(ss, matchedIdVal);
 
     return {
@@ -176,7 +161,7 @@ function getShareholderInfo(shId) {
       address: matchedAddress,
       phone: '',
       memberType: matchedCat,
-      shareQuantity: matchedShares > 0 ? matchedShares : 1,
+      shareQuantity: matchedShares,
       eligible: !hasReceived,
       hasReceived: hasReceived
     };
@@ -198,7 +183,7 @@ function checkReceivedInAllotments(ss, shId) {
 
     for (let i = 1; i < data.length; i++) {
       const rowId = String(data[i][1] || '').trim();
-      if (scoreIdMatch(shId, rowId) === 100) {
+      if (scoreIdMatch(shId, rowId) > 0) {
         return true;
       }
     }
@@ -240,7 +225,7 @@ function verifyLoginUser(userId, password) {
     const cellId = String(data[i][idIdx] || '').trim().toUpperCase();
     if (!cellId) continue;
 
-    if (scoreIdMatch(targetId, cellId) === 100 || cellId === targetId) {
+    if (scoreIdMatch(targetId, cellId) > 0 || cellId === targetId) {
       const expectedPass = String(data[i][passIdx] || '').trim();
       if (enteredPass !== expectedPass) {
         return { success: false, message: 'Incorrect password.' };
