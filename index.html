@@ -8,11 +8,11 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="theme-color" content="#3B82F6">
-  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v30.0</title>
+  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v36.0</title>
 
   <script>
     (function() {
-      var BUILD_VERSION = "SAT_V30.0_EXACT_UNIQUE_NUMBER_VERIFICATION";
+      var BUILD_VERSION = "SAT_V36.0_STRICT_EXACT_UNIQUE_SHAREHOLDER_ID_ENGINE";
       try {
         var lastVer = localStorage.getItem("sat_app_build_ver");
         if (lastVer !== BUILD_VERSION) {
@@ -59,7 +59,6 @@
 
     .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Header Blue/Purple Gradient */
     .header-banner-bg {
       background: linear-gradient(135deg, #3B82F6 0%, #4F46E5 50%, #7C3AED 100%);
     }
@@ -98,14 +97,6 @@
       box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
     }
 
-    .input-modern:read-only {
-      background-color: #F8FAFC;
-      border-style: dashed;
-      border-color: #CBD5E1;
-      color: #334155;
-      font-weight: 600;
-    }
-
     .btn-action {
       font-family: inherit;
       touch-action: manipulation;
@@ -113,7 +104,6 @@
     }
     .btn-action:active:not(:disabled) { transform: scale(0.98); }
 
-    /* Custom Radio Chip Options */
     .option-chip {
       display: flex;
       align-items: center;
@@ -134,7 +124,6 @@
       box-shadow: 0 4px 12px rgba(59, 130, 246, 0.12);
     }
 
-    /* Live QR Camera Scanner Overlay */
     #qrCameraReader {
       width: 100%;
       max-width: 350px;
@@ -275,7 +264,6 @@
         </div>
       </div>
 
-      <!-- RESET ALL UNBLOCK BUTTON -->
       <div class="p-3.5 bg-amber-50/80 border border-amber-200/80 rounded-xl space-y-1.5">
         <div class="text-xs font-bold text-amber-800 flex items-center gap-1.5">
           <i class="fas fa-unlock text-amber-600"></i> Reset All Shareholder Restrictions
@@ -329,10 +317,10 @@
 
       <form onsubmit="submitAddShareholder(event)" class="space-y-3">
         <div>
-          <label for="newShId" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Shareholder ID *:</label>
+          <label for="newShId" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Share Number *:</label>
           <div class="relative">
             <i class="fas fa-id-card absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-            <input type="text" id="newShId" class="input-modern !min-h-[46px]" placeholder="e.g. *3277, *3411, &32, or 3277" required uppercase>
+            <input type="text" id="newShId" class="input-modern !min-h-[46px]" placeholder="e.g. 1, *1, #1, 2, *18..." required uppercase>
           </div>
         </div>
 
@@ -341,22 +329,6 @@
           <div class="relative">
             <i class="fas fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
             <input type="text" id="newShName" class="input-modern !min-h-[46px]" placeholder="e.g. Lakshmibai Siddalingappa Pattanashetti" required>
-          </div>
-        </div>
-
-        <div>
-          <label for="newShAddress" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Address / Village:</label>
-          <div class="relative">
-            <i class="fas fa-map-marker-alt absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-            <input type="text" id="newShAddress" class="input-modern !min-h-[46px]" placeholder="e.g. Dindavara" value="Maragur">
-          </div>
-        </div>
-
-        <div>
-          <label for="newShPhone" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Mobile Phone Number:</label>
-          <div class="relative">
-            <i class="fas fa-phone absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-            <input type="text" id="newShPhone" class="input-modern !min-h-[46px]" placeholder="9876543299" maxlength="10">
           </div>
         </div>
 
@@ -371,7 +343,6 @@
             <select id="newShType" class="input-modern !min-h-[46px] !pl-3 text-xs">
               <option value="ಅ - वर्ग">ಅ - वर्ग</option>
               <option value="ಬ - वर्ग">ಬ - वर्ग</option>
-              <option value="Regular Shareholder">Regular Shareholder</option>
             </select>
           </div>
         </div>
@@ -487,15 +458,15 @@
   </div>
 
 
-  <!-- CENTERED MAIN CONTAINER MATCHING SCREENSHOT (max-w-2xl) -->
+  <!-- CENTERED MAIN CONTAINER (max-w-2xl) -->
   <div class="max-w-2xl mx-auto px-4 sm:px-6 pt-5 sm:pt-7 space-y-4">
 
-    <!-- HEADER BANNER (3X2 GRID REDESIGN + VERSION BADGE) -->
+    <!-- HEADER BANNER -->
     <header class="header-banner-bg text-white rounded-3xl p-5 sm:p-6 shadow-xl text-center space-y-3.5 relative">
       
       <!-- VERSION CHIP -->
       <div class="absolute top-3 right-4 bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-extrabold text-blue-100 border border-white/30">
-        v30.0 Live
+        v36.0 Live
       </div>
 
       <!-- LOGO + TITLE -->
@@ -505,38 +476,32 @@
       </div>
       
       <!-- SUBTITLE -->
-      <p class="text-blue-100 text-xs sm:text-sm font-medium">Distribute sugar to eligible shareholders</p>
+      <p class="text-blue-100 text-xs sm:text-sm font-medium">Verify Shareholders (Strict Exact Match for 1, *1, #1, 2, *2, #2)</p>
 
-      <!-- 3X2 GRID HEADER CONTROLS BAR (3 COLUMNS x 2 ROWS) -->
+      <!-- 3X2 GRID HEADER CONTROLS BAR -->
       <div id="mainHeaderActions" class="hidden grid grid-cols-3 gap-2 pt-3 border-t border-white/20 text-xs">
         
-        <!-- ROW 1 ITEM 1: CASHIER BADGE -->
         <div id="userBadge" class="col-span-1 bg-white/20 backdrop-blur-md px-2 py-2 rounded-xl text-white text-[11px] font-bold border border-white/25 flex items-center justify-center space-x-1 truncate shadow-xs">
           <i class="fas fa-user-circle text-blue-200 text-xs"></i>
           <span class="truncate" id="userBadgeName">Cashier 1</span>
         </div>
 
-        <!-- ROW 1 ITEM 2: LOGOUT -->
         <button type="button" onclick="doLogout()" class="col-span-1 px-2 py-2 bg-rose-500/40 hover:bg-rose-500/60 border border-rose-300/40 rounded-xl font-bold text-[11px] text-white transition flex items-center justify-center space-x-1.5 shadow-xs">
           <i class="fas fa-sign-out-alt text-xs"></i> <span>Logout</span>
         </button>
 
-        <!-- ROW 1 ITEM 3: SETTINGS -->
         <button type="button" onclick="openGasConfigModal()" class="col-span-1 px-2 py-2 bg-white/20 hover:bg-white/35 border border-white/30 rounded-xl font-bold text-[11px] text-white transition flex items-center justify-center space-x-1.5 shadow-xs">
           <i class="fas fa-cog text-xs"></i> <span>Settings</span>
         </button>
 
-        <!-- ROW 2 ITEM 4: NEW ALLOTMENT -->
         <button type="button" onclick="startNewAllotment()" class="col-span-1 px-2 py-2 bg-white/20 hover:bg-white/35 border border-white/30 rounded-xl font-bold text-[11px] text-white transition flex items-center justify-center space-x-1.5 shadow-xs truncate">
           <i class="fas fa-plus text-[10px]"></i> <span class="truncate">New</span>
         </button>
 
-        <!-- ROW 2 ITEM 5: VIEW ALLOTMENT RESULTS -->
         <button type="button" onclick="switchNavTab('allotmentsTab')" class="col-span-1 px-2 py-2 bg-white/20 hover:bg-white/35 border border-white/30 rounded-xl font-bold text-[11px] text-white transition flex items-center justify-center space-x-1.5 shadow-xs truncate">
           <i class="fas fa-list-alt text-[10px]"></i> <span class="truncate">Results</span>
         </button>
 
-        <!-- ROW 2 ITEM 6: ADD SHAREHOLDER -->
         <button type="button" onclick="openAddShareholderModal()" class="col-span-1 px-2 py-2 bg-emerald-500/40 hover:bg-emerald-500/60 border border-emerald-300/40 rounded-xl font-bold text-[11px] text-white transition flex items-center justify-center space-x-1.5 shadow-xs truncate">
           <i class="fas fa-user-plus text-[10px]"></i> <span class="truncate">+ Shareholder</span>
         </button>
@@ -609,25 +574,25 @@
       </div>
 
 
-      <!-- STEP 1: ENTER SHAREHOLDER ID -->
+      <!-- STEP 1: VERIFY SHAREHOLDER BY SHARE NUMBER -->
       <div id="step1" class="card-modern active bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
         <div class="flex items-center space-x-3 pb-4 border-b border-slate-100">
           <i class="fas fa-id-card text-slate-800 text-xl"></i>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-800">Enter Shareholder ID</h2>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-800">Verify Shareholder by Share Number</h2>
         </div>
 
         <div class="space-y-5">
           <div>
-            <label for="shareholderIdInput" class="block text-xs font-bold text-slate-600 mb-2">Enter Your Shareholder ID:</label>
+            <label for="shareholderIdInput" class="block text-xs font-bold text-slate-600 mb-2">Enter Share Number (Column A in Shareholders Tab, e.g. 1, *1, #1):</label>
             <div class="relative">
-              <i class="fas fa-id-card absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-              <input type="text" id="shareholderIdInput" class="input-modern font-semibold" placeholder="e.g. *3277, *3411, &32, 3277, #101, 2..." value="*3277" onkeydown="if(event.key==='Enter') verifyShareholder()">
+              <i class="fas fa-hashtag absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" id="shareholderIdInput" class="input-modern font-semibold" placeholder="e.g. 1, *1, #1, 2, *18..." value="1" onkeydown="if(event.key==='Enter') verifyShareholder()">
             </div>
           </div>
 
           <div class="flex flex-col sm:flex-row gap-3 pt-2">
             <button id="verifyBtn" onclick="verifyShareholder()" class="btn-action flex-1 py-4 bg-blue-500 hover:bg-blue-600 text-white font-extrabold rounded-2xl text-sm shadow-md flex items-center justify-center gap-2">
-              <i class="fas fa-search"></i> <span>Verify</span>
+              <i class="fas fa-search"></i> <span>Verify Share Number</span>
             </button>
             <button type="button" onclick="openCameraScannerModal()" class="btn-action flex-1 py-4 bg-violet-600 hover:bg-violet-700 text-white font-extrabold rounded-2xl text-sm shadow-md flex items-center justify-center gap-2">
               <i class="fas fa-qrcode"></i> <span>Scan with Phone</span>
@@ -637,57 +602,30 @@
       </div>
 
 
-      <!-- STEP 2: SHAREHOLDER INFORMATION -->
+      <!-- STEP 2: VERIFIED ALLOTMENT SUMMARY -->
       <div id="step2" class="card-modern bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
         <div class="flex items-center space-x-3.5 pb-4 border-b border-slate-100">
           <div class="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xl shadow-xs">
             <i class="fas fa-user-check"></i>
           </div>
           <div>
-            <h2 class="text-xl font-extrabold text-slate-800">Shareholder Account Details</h2>
-            <p class="text-xs text-slate-400 font-medium">Verified account details & sugar calculation</p>
+            <h2 class="text-xl font-extrabold text-slate-800">Verified Shareholder Allotment</h2>
+            <p class="text-xs text-slate-400 font-medium">Verified by Share Number against Google Sheet</p>
           </div>
         </div>
 
-        <div id="verifiedFields" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Shareholder Name</label>
-            <div class="relative">
-              <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-              <input type="text" id="shareholderName" class="input-modern text-xs" readonly />
-            </div>
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+          <div class="flex justify-between items-center text-xs sm:text-sm">
+            <span class="text-slate-500 font-semibold">Share Number:</span>
+            <span id="displayShareNo" class="font-bold text-blue-700 font-mono text-sm sm:text-base">-</span>
           </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Address</label>
-            <div class="relative">
-              <i class="fas fa-map-marker-alt absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-              <input type="text" id="shareholderAddress" class="input-modern text-xs" readonly />
-            </div>
+          <div class="flex justify-between items-center text-xs sm:text-sm border-t border-slate-200 pt-2">
+            <span class="text-slate-500 font-semibold">Shareholder Name:</span>
+            <span id="displayShareName" class="font-extrabold text-slate-800 text-sm sm:text-base text-right">-</span>
           </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Phone Number</label>
-            <div class="relative">
-              <i class="fas fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-              <input type="text" id="shareholderPhone" class="input-modern text-xs" readonly />
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Category</label>
-            <div class="relative">
-              <i class="fas fa-users absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-              <input type="text" id="memberType" class="input-modern text-xs" readonly />
-            </div>
-          </div>
-
-          <div class="sm:col-span-2">
-            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Share Quantity</label>
-            <div class="relative">
-              <i class="fas fa-chart-pie absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-              <input type="text" id="shareQuantity" class="input-modern text-xs font-mono font-bold" readonly />
-            </div>
+          <div class="flex justify-between items-center text-xs sm:text-sm border-t border-slate-200 pt-2">
+            <span class="text-slate-500 font-semibold">Share Quantity:</span>
+            <span id="displayShareQty" class="font-bold text-slate-800 font-mono text-sm">-</span>
           </div>
         </div>
 
@@ -787,7 +725,7 @@
       <!-- SEARCH BAR IN LEDGER -->
       <div class="relative">
         <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-        <input type="text" id="ledgerSearchInput" placeholder="Search ID, Name or Receipt Number..." onkeyup="filterLedgerTable()" class="input-modern pl-11">
+        <input type="text" id="ledgerSearchInput" placeholder="Search Share Number (*1, #1, 1), Name or Receipt Number..." onkeyup="filterLedgerTable()" class="input-modern pl-11">
       </div>
 
       <!-- ALLOTMENT TABLE -->
@@ -796,7 +734,7 @@
           <thead class="bg-slate-100/90 text-slate-700 font-bold uppercase tracking-wider text-[10px] sm:text-[11px] border-b border-slate-200">
             <tr>
               <th class="p-3.5">Receipt #</th>
-              <th class="p-3.5">ID</th>
+              <th class="p-3.5">Share #</th>
               <th class="p-3.5">Name</th>
               <th class="p-3.5">Quantity</th>
               <th class="p-3.5">Total (Rs)</th>
@@ -860,11 +798,16 @@
       checkSession();
     }
 
-    /* ----------------------------------------------------
-       EXACT UNIQUE ID MATCHING ENGINE v30.0
-       Enforces exact string equality (case-insensitive, space-cleaned).
-       Typing '2' ONLY matches exact ID '2', NOT '*2', '&2', '20', '22', etc.
-    ---------------------------------------------------- */
+    /**
+     * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v36.0
+     * Enforces 100% exact string equality (case-insensitive, whitespace-cleaned).
+     * Typing '1' ONLY matches exact ID '1' (NOT '*1', '#1', '10', '12', etc.).
+     * Typing '*1' ONLY matches exact ID '*1'.
+     * Typing '#1' ONLY matches exact ID '#1'.
+     * Typing '*2' ONLY matches exact ID '*2'.
+     * Typing '#2' ONLY matches exact ID '#2'.
+     * NO partial, contained, or substring matching.
+     */
     function scoreIdMatch(targetRaw, cellRaw) {
       if (targetRaw === undefined || targetRaw === null || cellRaw === undefined || cellRaw === null) return 0;
 
@@ -873,23 +816,25 @@
 
       if (!targetClean || !cellClean) return 0;
 
-      // Exact string match ONLY
+      // 100% Exact string match ONLY
       if (targetClean === cellClean) return 100;
 
       return 0;
     }
 
-    /* ----------------------------------------------------
-       MULTI-PAGE GVIZ JSONP FETCHING ENGINE v30.0
-       Fetches ALL 20,000+ rows across all offset pages with ZERO CORS restrictions!
-    ---------------------------------------------------- */
-    function fetchAllDatabaseRows(callback) {
+    function fetchAllDatabaseRows(sheetName, callback) {
+      if (typeof sheetName === 'function') {
+        callback = sheetName;
+        sheetName = 'Shareholders';
+      }
+      sheetName = sheetName || 'Shareholders';
+
       const offsets = [0, 5000, 10000, 15000];
       let combinedRows = [];
       let completed = 0;
 
       offsets.forEach(function(offset) {
-        fetchGvizPageWithOffset(offset, function(rows) {
+        fetchGvizPageWithOffset(offset, sheetName, function(rows) {
           if (rows && rows.length > 0) {
             combinedRows = combinedRows.concat(rows);
           }
@@ -901,10 +846,14 @@
       });
     }
 
-    function fetchGvizPageWithOffset(offset, callback) {
+    function fetchGvizPageWithOffset(offset, sheetName, callback) {
       const cbName = 'gviz_cb_off_' + offset + '_' + Math.floor(Math.random() * 1000000000);
       const tqQuery = encodeURIComponent('SELECT * LIMIT 5000 OFFSET ' + offset);
-      const url = 'https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/gviz/tq?tqx=responseHandler:' + cbName + '&tq=' + tqQuery + '&nocache=' + Date.now();
+      let url = 'https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/gviz/tq?tqx=responseHandler:' + cbName;
+      if (sheetName) {
+        url += '&sheet=' + encodeURIComponent(sheetName);
+      }
+      url += '&tq=' + tqQuery + '&nocache=' + Date.now();
 
       let timer = null;
       const script = document.createElement('script');
@@ -1089,7 +1038,7 @@
         let foundUser = null;
 
         for (let u of usersList) {
-          if (scoreIdMatch(targetId, u.id) > 0 || u.id.toUpperCase() === targetId) {
+          if (scoreIdMatch(targetId, u.id) === 100 || u.id.toUpperCase() === targetId) {
             foundUser = u;
             break;
           }
@@ -1119,30 +1068,26 @@
       }
     }
 
-    /* ----------------------------------------------------
-       SMART QR CODE & BARCODE PARSER ENGINE
-       Preserves exact shareholder symbols (*3411, *3277, &32, #101, $250)
-    ---------------------------------------------------- */
     function parseShareholderIdFromQr(text) {
       if (!text) return '';
       text = text.trim();
 
-      let match = text.match(/SHARE_NO\s*:\s*([#$&*A-Za-z0-9\-_]+)/i);
+      let match = text.match(/SHARE_NO\s*:\s*([#$&*@!%^+~\-A-Za-z0-9]+)/i);
       if (match && match[1]) return match[1].trim();
 
-      match = text.match(/(?:SHAREHOLDER_ID|SH_ID|SH_NO|MEMBER_ID|ID)\s*:\s*([#$&*A-Za-z0-9\-_]+)/i);
+      match = text.match(/(?:SHAREHOLDER_ID|SH_ID|SH_NO|MEMBER_ID|ID)\s*:\s*([#$&*@!%^+~\-A-Za-z0-9]+)/i);
       if (match && match[1]) return match[1].trim();
 
       if (text.includes('|')) {
         const parts = text.split('|');
         for (let part of parts) {
           part = part.trim();
-          let m = part.match(/SHARE_NO\s*:\s*([#$&*A-Za-z0-9\-_]+)/i) || part.match(/ID\s*:\s*([#$&*A-Za-z0-9\-_]+)/i);
+          let m = part.match(/SHARE_NO\s*:\s*([#$&*@!%^+~\-A-Za-z0-9]+)/i) || part.match(/ID\s*:\s*([#$&*@!%^+~\-A-Za-z0-9]+)/i);
           if (m && m[1]) return m[1].trim();
         }
         for (let part of parts) {
-          let dig = part.replace(/\D/g, '');
-          if (dig.length >= 1 && dig.length <= 10) return part.trim();
+          let trimmed = part.trim();
+          if (trimmed.length >= 1 && trimmed.length <= 15) return trimmed;
         }
       }
 
@@ -1158,9 +1103,6 @@
       return text;
     }
 
-    /* ----------------------------------------------------
-       LIVE WEB CAMERA QR & BARCODE SCANNER INTEGRATION
-    ---------------------------------------------------- */
     let html5QrCodeScanner = null;
 
     function openCameraScannerModal() {
@@ -1202,13 +1144,11 @@
 
       const parsedId = parseShareholderIdFromQr(decodedText);
       document.getElementById('shareholderIdInput').value = parsedId;
-      showAlert('Scanned Shareholder ID: ' + parsedId, 'success');
+      showAlert('Scanned Share Number: ' + parsedId, 'success');
       verifyShareholder();
     }
 
-    function onQrScanFailure(error) {
-      // Continuous scanning
-    }
+    function onQrScanFailure(error) {}
 
     function switchNavTab(tabName) {
       const distView = document.getElementById('distributionView');
@@ -1238,19 +1178,20 @@
       if (!shId) return false;
       const receivedList = JSON.parse(safeStorageGet('sat_received_ids') || '[]');
       for (let rec of receivedList) {
-        if (scoreIdMatch(shId, rec) > 0) return true;
+        // Enforce STRICT EXACT match ONLY
+        if (scoreIdMatch(shId, rec) === 100) return true;
       }
 
       const localLedger = JSON.parse(safeStorageGet('sat_local_allotments') || '[]');
       for (let k = 0; k < localLedger.length; k++) {
         const itemShId = localLedger[k].shareholderId || localLedger[k].id || '';
-        if (scoreIdMatch(shId, itemShId) > 0) return true;
+        if (scoreIdMatch(shId, itemShId) === 100) return true;
       }
       return false;
     }
 
     function unblockShareholderWithPin(shId) {
-      const pin = window.prompt('Enter Admin Security PIN to UNBLOCK Shareholder ID ' + shId + ':');
+      const pin = window.prompt('Enter Admin Security PIN to UNBLOCK Share Number ' + shId + ':');
       if (pin === null) return;
       if (pin.trim() !== ADMIN_UNBLOCK_PIN) {
         showAlert('Incorrect PIN! Unblock request cancelled.', 'error');
@@ -1262,13 +1203,14 @@
     function unblockShareholder(shId) {
       if (!shId) return;
       let receivedList = JSON.parse(safeStorageGet('sat_received_ids') || '[]');
-      receivedList = receivedList.filter(id => scoreIdMatch(shId, id) === 0);
+      // Filter out ONLY exact match so unblocking '*1' does not unblock '1' or '#1'
+      receivedList = receivedList.filter(id => scoreIdMatch(shId, id) !== 100);
       safeStorageSet('sat_received_ids', JSON.stringify(receivedList));
 
       let localLedger = JSON.parse(safeStorageGet('sat_local_allotments') || '[]');
       localLedger = localLedger.filter(item => {
         const itemId = item.shareholderId || item.id || '';
-        return scoreIdMatch(shId, itemId) === 0;
+        return scoreIdMatch(shId, itemId) !== 100;
       });
       safeStorageSet('sat_local_allotments', JSON.stringify(localLedger));
 
@@ -1280,11 +1222,11 @@
 
       if (eligibilityDiv) {
         eligibilityDiv.className = 'p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs flex items-center space-x-2.5 font-semibold';
-        eligibilityDiv.innerHTML = '<i class="fas fa-check-circle text-emerald-600 text-base"></i> <span><strong>UNBLOCKED!</strong> Shareholder ID ' + shId + ' is now eligible for sugar allotment.</span>';
+        eligibilityDiv.innerHTML = '<i class="fas fa-check-circle text-emerald-600 text-base"></i> <span><strong>UNBLOCKED!</strong> Share Number ' + shId + ' is now eligible for sugar allotment.</span>';
       }
 
       if (submitBtn) submitBtn.disabled = false;
-      showAlert('Shareholder ID ' + shId + ' has been UNBLOCKED!', 'success');
+      showAlert('Share Number ' + shId + ' has been UNBLOCKED!', 'success');
       renderAllotmentsLedgerTable();
     }
 
@@ -1298,7 +1240,7 @@
       safeStorageRemove('sat_received_ids');
       safeStorageRemove('sat_local_allotments');
       closeGasConfigModal();
-      showAlert('All local claim restrictions reset successfully! All shareholders can now claim sugar.', 'success');
+      showAlert('All claim restrictions reset successfully!', 'success');
       startNewAllotment();
       renderAllotmentsLedgerTable();
     }
@@ -1434,92 +1376,107 @@
     }
 
     /* ----------------------------------------------------
-       EXACT UNIQUE SHAREHOLDER FETCH ENGINE v30.0
-       Enforces exact string equality matching ONLY.
-       Typing '2' ONLY matches exact ID '2', NOT '*2', '&2', '20', '22', etc.
+       STRICT TARGETED SHAREHOLDER FETCH ENGINE v36.0
+       Enforces 100% exact string equality. Does NOT take contained numbers!
     ---------------------------------------------------- */
     function fetchShareholderFromGviz(shareholderId, callback) {
       const rawTarget = String(shareholderId || '').trim();
       if (!rawTarget) {
-        callback({ found: false, message: 'Please enter a Shareholder ID.' });
+        callback({ found: false, message: 'Please enter a Share Number.' });
         return;
       }
 
-      fetchAllDatabaseRows(function(rows) {
+      fetchAllDatabaseRows('Shareholders', function(rows) {
         if (!rows || rows.length === 0) {
-          callback({ found: false, message: 'Could not load Google Sheet database.' });
+          fetchAllDatabaseRows('Shareholder', function(fallbackRows) {
+            processShareholderRows(fallbackRows || []);
+          });
           return;
+        }
+        processShareholderRows(rows);
+      });
+
+      function processShareholderRows(rows) {
+        if (!rows || rows.length === 0) {
+          callback({ found: false, message: 'Could not load Shareholders tab from Google Sheet database.' });
+          return;
+        }
+
+        let idColIdx = 0;
+        let startRow = 0;
+
+        if (rows.length > 0 && rows[0]) {
+          for (let c = 0; c < rows[0].length; c++) {
+            const h = String(rows[0][c] || '').toLowerCase().trim();
+            if (h.includes('shareholder id') || h.includes('share no') || h.includes('sh_id') || h === 'id') {
+              idColIdx = c;
+              startRow = 1;
+              break;
+            }
+          }
+          if (startRow === 0 && (String(rows[0][idColIdx]).toLowerCase().includes('id') || String(rows[0][idColIdx]).toLowerCase().includes('share'))) {
+            startRow = 1;
+          }
         }
 
         let exactMatch = null;
 
-        for (let i = 0; i < rows.length; i++) {
+        for (let i = startRow; i < rows.length; i++) {
           const r = rows[i];
           if (!r || r.length === 0) continue;
 
-          for (let j = 0; j < r.length; j++) {
-            const cellVal = String(r[j] || '').trim();
-            if (!cellVal) continue;
+          const cellVal = String(r[idColIdx] || r[0] || '').trim();
+          if (!cellVal) continue;
 
-            const score = scoreIdMatch(rawTarget, cellVal);
+          const score = scoreIdMatch(rawTarget, cellVal);
 
-            if (score === 100) {
-              exactMatch = { row: r, idColIdx: j, cellVal: cellVal };
-              break;
-            }
+          if (score === 100) {
+            exactMatch = { row: r, idColIdx: idColIdx, cellVal: cellVal };
+            break; // Found 100% exact match!
           }
-
-          if (exactMatch) break; // Found exact match!
         }
 
         if (exactMatch) {
           const r = exactMatch.row;
-          const idColIdx = exactMatch.idColIdx;
           const matchedIdVal = exactMatch.cellVal;
 
-          let matchedName = '';
-          let matchedAddress = 'Maragur';
-          let matchedCat = 'ಅ - वर्ग';
+          let matchedName = String(r[1] || '').trim();
           let matchedShares = 1;
 
-          for (let j = 0; j < r.length; j++) {
-            if (j === idColIdx) continue;
-            const val = String(r[j] || '').trim();
-            if (!val) continue;
+          if (r[4] !== undefined && r[4] !== null && /^\d+$/.test(String(r[4]).trim())) {
+            matchedShares = parseInt(String(r[4]).trim(), 10);
+          }
 
-            if (val.includes('वर्ग') || val.includes('Class') || val.includes('Regular')) {
-              matchedCat = val;
-            } else if (/^\d+$/.test(val) && parseInt(val, 10) > 0 && parseInt(val, 10) <= 500) {
-              matchedShares = parseInt(val, 10);
-            } else if (!matchedName && val.length > 1 && !/^\d+$/.test(val)) {
-              matchedName = val;
-            } else if (matchedName && matchedAddress === 'Maragur' && !/^\d+$/.test(val)) {
-              matchedAddress = val;
+          if (!matchedName || /^\d+$/.test(matchedName)) {
+            for (let j = 0; j < r.length; j++) {
+              if (j === exactMatch.idColIdx) continue;
+              const val = String(r[j] || '').trim();
+              if (val && val.length > 1 && !/^\d+$/.test(val)) {
+                matchedName = val;
+                break;
+              }
             }
           }
 
           if (!matchedName) matchedName = 'Shareholder ' + matchedIdVal;
 
-          const hasReceivedInLocal = isShareholderReceivedLocal(rawTarget) || isShareholderReceivedLocal(matchedIdVal);
+          const hasReceivedInLocal = isShareholderReceivedLocal(matchedIdVal);
 
           callback({
             found: true,
             id: matchedIdVal,
             name: matchedName,
-            address: matchedAddress,
-            phone: '',
-            memberType: matchedCat,
-            shareQuantity: matchedShares,
+            shareQuantity: matchedShares > 0 ? matchedShares : 1,
             eligible: !hasReceivedInLocal,
             hasReceived: hasReceivedInLocal
           });
         } else {
           callback({
             found: false,
-            message: 'Shareholder ID "' + rawTarget + '" not found in Google Sheet database.'
+            message: 'Share Number "' + rawTarget + '" not found in Google Sheet Shareholders tab.'
           });
         }
-      });
+      }
     }
 
     function testGasConnection() {
@@ -1528,7 +1485,7 @@
 
       fetchShareholderFromGviz('1', function(res) {
         if (res && res.found) {
-          testStatus.innerHTML = '<span class="text-emerald-600 font-bold"><i class="fas fa-check-circle mr-1"></i> Connected! Row 1: ' + res.name + ' (' + res.address + ')</span>';
+          testStatus.innerHTML = '<span class="text-emerald-600 font-bold"><i class="fas fa-check-circle mr-1"></i> Connected! Row 1: ' + res.name + '</span>';
         } else {
           testStatus.innerHTML = '<span class="text-emerald-600 font-bold"><i class="fas fa-check-circle mr-1"></i> Connected to Google Sheet! ' + (res.message || '') + '</span>';
         }
@@ -1552,10 +1509,10 @@
           } else {
             if (gasApiUrl && gasApiUrl.startsWith('http')) {
               tryAppsScriptApi(fnName, argsArray, successCb, function(err) {
-                if (successCb) successCb(res || { found: false, message: 'Shareholder ID "' + shId + '" not found in Google Sheet.' });
+                if (successCb) successCb(res || { found: false, message: 'Share Number "' + shId + '" not found in Google Sheet Shareholders tab.' });
               });
             } else {
-              if (successCb) successCb(res || { found: false, message: 'Shareholder ID "' + shId + '" not found in Google Sheet.' });
+              if (successCb) successCb(res || { found: false, message: 'Share Number "' + shId + '" not found in Google Sheet Shareholders tab.' });
             }
           }
         });
@@ -1653,8 +1610,7 @@
     let currentUser = null;
 
     let currentShareholder = {
-      id: '', name: '', address: '', phone: '',
-      shareQuantity: 0, eligible: false, hasReceived: false
+      id: '', name: '', shareQuantity: 0, eligible: false, hasReceived: false
     };
 
     let allotmentConfig = {
@@ -1709,20 +1665,18 @@
       e.preventDefault();
       const id = document.getElementById('newShId').value.trim().toUpperCase();
       const name = document.getElementById('newShName').value.trim();
-      const address = document.getElementById('newShAddress').value.trim();
-      const phone = document.getElementById('newShPhone').value.trim();
       const shares = parseInt(document.getElementById('newShShares').value, 10) || 1;
       const memberType = document.getElementById('newShType').value;
 
       if (!id || !name) {
-        showAlert('Shareholder ID and Full Name are required.', 'error');
+        showAlert('Share Number and Full Name are required.', 'error');
         return;
       }
 
       const btn = document.getElementById('addShSubmitBtn');
       if (!setBtnBusy(btn, true, 'Saving…')) return;
 
-      const shData = { id, name, address, phone, shares, memberType };
+      const shData = { id, name, shares, memberType };
 
       callBackend(
         'addShareholder',
@@ -2113,7 +2067,7 @@
 
       let shareholderId = document.getElementById('shareholderIdInput').value.trim();
       if (!shareholderId) {
-        showAlert('Please enter shareholder ID or scan QR code.', 'error');
+        showAlert('Please enter Share Number or scan QR code.', 'error');
         return;
       }
 
@@ -2133,25 +2087,21 @@
           setBtnBusy(btn, false);
 
           if (!result || !result.found) {
-            showAlert((result && result.message) || 'Shareholder ID "' + shareholderId + '" not found in Google Sheet database.', 'error');
+            showAlert((result && result.message) || 'Share Number "' + shareholderId + '" not found in Google Sheet Shareholders tab.', 'error');
             return;
           }
 
           currentShareholder = {
             id: result.id || shareholderId,
             name: result.name,
-            address: result.address,
-            phone: result.phone,
             shareQuantity: result.shareQuantity,
             eligible: result.eligible,
             hasReceived: result.hasReceived
           };
 
-          document.getElementById('shareholderName').value = result.name || '';
-          document.getElementById('shareholderAddress').value = result.address || '';
-          document.getElementById('shareholderPhone').value = result.phone || '';
-          document.getElementById('memberType').value = result.memberType || '';
-          document.getElementById('shareQuantity').value = result.shareQuantity || '0';
+          document.getElementById('displayShareNo').textContent = result.id || shareholderId;
+          document.getElementById('displayShareName').textContent = result.name || '-';
+          document.getElementById('displayShareQty').textContent = (result.shareQuantity || 1) + ' Share' + ((result.shareQuantity > 1) ? 's' : '');
 
           calculateAllotment();
 
@@ -2164,10 +2114,10 @@
             eligibilityDiv.innerHTML = 
               '<div class="text-xs text-rose-700 font-bold flex items-center gap-2">' +
                 '<i class="fas fa-ban text-rose-600 text-xl"></i>' +
-                '<span>RESTRICTED: Shareholder ID ' + currentShareholder.id + ' has ALREADY received sugar allotment. Duplicate claim is blocked.</span>' +
+                '<span>RESTRICTED: Share Number ' + currentShareholder.id + ' has ALREADY received sugar allotment. Duplicate claim is blocked.</span>' +
               '</div>' +
               '<button type="button" onclick="unblockShareholderWithPin(\'' + currentShareholder.id + '\')" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-xs transition">' +
-                '<i class="fas fa-unlock"></i> Click Here to UNBLOCK Shareholder ID ' + currentShareholder.id +
+                '<i class="fas fa-unlock"></i> Click Here to UNBLOCK Share Number ' + currentShareholder.id +
               '</button>';
             submitBtn.disabled = true;
           } else if (!result.eligible) {
@@ -2193,7 +2143,7 @@
 
     function startNewAllotment() {
       document.getElementById('shareholderIdInput').value = '';
-      currentShareholder = { id: '', name: '', address: '', phone: '', shareQuantity: 0, eligible: false, hasReceived: false };
+      currentShareholder = { id: '', name: '', shareQuantity: 0, eligible: false, hasReceived: false };
       switchNavTab('distribution');
       showStep('step1');
     }
@@ -2203,5 +2153,5 @@
       checkSession();
     });
   </script>
-</body>
+</body> 
 </html>
