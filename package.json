@@ -1,0 +1,22 @@
+{
+  "name": "sugar-allotment-ui",
+  "version": "1.0.0",
+  "description": "Shree Bheemashankar S S K N., Maragur - Sugar Allotment System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "keywords": [
+    "sugar-allotment",
+    "google-apps-script",
+    "express",
+    "nodejs"
+  ],
+  "author": "Antigravity",
+  "license": "ISC"
+}

@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#F4F7FC]">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="theme-color" content="#3B82F6">
+  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v36.0</title>
+
+  <script>
+    (function() {
+      var BUILD_VERSION = "SAT_V36.0_STRICT_EXACT_UNIQUE_SHAREHOLDER_ID_ENGINE";
+      try {
+        var lastVer = localStorage.getItem("sat_app_build_ver");
+        if (lastVer !== BUILD_VERSION) {
+          localStorage.setItem("sat_app_build_ver", BUILD_VERSION);
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+              for (let registration of registrations) { registration.unregister(); }
+            });
+          }
+          if ('caches' in window) {
+            caches.keys().then(function(names) {
+              for (let name of names) caches.delete(name);
+            });
+          }
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Google Fonts & Tailwind CSS & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- HTML5 QR CODE LIVE CAMERA SCANNER ENGINE -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #3B82F6;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0F172A;
+      -webkit-tap-highlight-color: transparent;
+      background-color: #F4F7FC;
+    }
+
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    .header-banner-bg {
+      background: linear-gradient(135deg, #3B82F6 0%, #4F46E5 50%, #7C3AED 100%);
+    }
+
+    .card-modern {
+      background: #FFFFFF;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.02);
+      border: 1px solid #E2E8F0;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      display: none;
+      transition: all 0.2s ease;
+    }
+    .card-modern.active { display: block; }
+
+    .input-modern {
+      width: 100%;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.85rem 1rem 0.85rem 2.85rem;
+      min-height: 50px;
+      border: 2px solid #E2E8F0;
+      border-radius: 1rem;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      background-color: #FFFFFF;
+      color: #0F172A;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .input-modern:focus {
+      outline: none;
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    }
+
+    .btn-action {
+      font-family: inherit;
+      touch-action: manipulation;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-action:active:not(:disabled) { transform: scale(0.98); }
+
+    .option-chip {
+      display: flex;
+      align-items: center;
+      padding: 0.85rem 1.15rem;
+      border-radius: 1rem;
+      border: 2px solid #E2E8F0;
+      background: #F8FAFC;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #334155;
+    }
+    .option-chip.selected {
+      border-color: #3B82F6;
+      background: #EFF6FF;
+      color: #1D4ED8;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.12);
+    }
+
+    #qrCameraReader {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      border: 3px solid #3B82F6;
+      box-shadow: 0 12px 25px -5px rgba(59, 130, 246, 0.25);
+    }
+    #qrCameraReader video { object-fit: cover !important; border-radius: 1.25rem; }
+
+    .scan-laser {
+      position: absolute;
+      top: 0; left: 5%; right: 5%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #22C55E, transparent);
+      box-shadow: 0 0 15px #22C55E;
+      animation: scanLaser 2s ease-in-out infinite;
+      z-index: 10;
+    }
+    @keyframes scanLaser {
+      0%, 100% { top: 10%; }
+      50% { top: 85%; }
+    }
+
+    .btn-spinner {
+      width: 16px;
+      height: 16px;
+      border: 2.5px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      display: inline-block;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(8px);
+      display: none;
+      z-index: 10000;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    @media (min-width: 640px) {
+      .modal-overlay { align-items: center; padding: 1rem; }
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-height: 92vh;
+      overflow-y: auto;
+      border-radius: 1.75rem 1.75rem 0 0;
+      padding: 1.5rem 1.5rem calc(1.5rem + var(--safe-bottom));
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      animation: modalUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (min-width: 640px) {
+      .modal-content {
+        max-width: 480px;
+        border-radius: 1.75rem;
+        animation: modalScale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+    }
+
+    @keyframes modalUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    @keyframes modalScale { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  </style>
+</head>
+<body onload="hideLoading()" class="min-h-full text-slate-900 pb-12">
+
+  <!-- GLOBAL LOADING OVERLAY -->
+  <div id="loadingOverlay" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[9999] hidden flex-col items-center justify-center p-4 text-center">
+    <div class="w-14 h-14 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mb-4 shadow-xl"></div>
+    <div id="loadingText" class="text-white font-bold text-base tracking-wide">Please wait...</div>
+  </div>
+
+
+  <!-- MODAL: LIVE CAMERA QR SCANNER -->
+  <div id="cameraScannerModal" class="modal-overlay">
+    <div class="modal-content space-y-4 text-center">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center space-x-3 text-slate-800 font-bold text-base">
+          <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+            <i class="fas fa-camera text-sm"></i>
+          </div>
+          <span>Scan Shareholder QR / Barcode</span>
+        </div>
+        <button onclick="closeCameraScannerModal()" class="text-slate-400 hover:text-slate-600 p-1.5 transition">
+          <i class="fas fa-times text-lg"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-500 font-medium">Point your camera at the Shareholder QR code or barcode to scan instantly:</p>
+
+      <div class="relative">
+        <div id="qrCameraReader"></div>
+        <div id="qrLaserAnim" class="scan-laser hidden"></div>
+      </div>
+
+      <div id="cameraScanStatus" class="text-xs font-bold text-blue-600 bg-blue-50/80 p-2.5 rounded-xl border border-blue-100">
+        <i class="fas fa-video mr-1"></i> Initializing camera...
+      </div>
+
+      <div class="flex gap-2 pt-1">
+        <button type="button" onclick="closeCameraScannerModal()" class="w-full py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl text-xs transition">
+          Close Scanner
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL: SYSTEM SETTINGS -->
+  <div id="gasConfigModal" class="modal-overlay">
+    <div class="modal-content space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="text-base font-extrabold text-slate-800 flex items-center space-x-2.5">
+          <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+            <i class="fas fa-tools text-sm"></i>
+          </div>
+          <span>System Settings & Security</span>
+        </div>
+        <button onclick="closeGasConfigModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i class="fas fa-times text-base"></i>
+        </button>
+      </div>
+
+      <div class="p-3.5 bg-blue-50/80 border border-blue-100 rounded-xl text-xs text-blue-950 space-y-1.5">
+        <div class="font-bold flex items-center gap-1.5 text-blue-800"><i class="fas fa-shield-alt text-blue-600"></i> Admin Security Protected</div>
+        <div class="text-slate-600 font-normal leading-relaxed text-[11px]">
+          Unblocking shareholders requires entering Secret Admin Security PIN (<strong>1207</strong>).
+        </div>
+      </div>
+
+      <div class="p-3.5 bg-amber-50/80 border border-amber-200/80 rounded-xl space-y-1.5">
+        <div class="text-xs font-bold text-amber-800 flex items-center gap-1.5">
+          <i class="fas fa-unlock text-amber-600"></i> Reset All Shareholder Restrictions
+        </div>
+        <p class="text-[11px] text-slate-600">Click below to clear all claim restrictions (Security PIN required):</p>
+        <button type="button" onclick="clearAllRestrictionsWithPin()" class="w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs shadow-sm transition flex items-center justify-center gap-1.5">
+          <i class="fas fa-sync-alt"></i> Reset All Restrictions
+        </button>
+      </div>
+
+      <form onsubmit="saveGasUrl(event)" class="space-y-3 pt-2 border-t border-slate-100">
+        <div>
+          <label for="gasUrlInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Apps Script Web App URL (Optional):</label>
+          <div class="relative">
+            <i class="fas fa-globe absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input type="text" id="gasUrlInput" class="input-modern !min-h-[44px] !text-xs" placeholder="https://script.google.com/macros/s/.../exec">
+          </div>
+        </div>
+
+        <div id="gasTestStatus" class="text-[11px] p-3 rounded-xl border bg-slate-50 border-slate-200 font-medium">
+          Click <strong>Test Connection</strong> to verify your Google Sheet.
+        </div>
+
+        <div class="flex gap-2 pt-1">
+          <button type="button" onclick="testGasConnection()" class="w-1/2 py-2.5 bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold rounded-xl text-xs transition">
+            Test Connection
+          </button>
+          <button type="submit" class="w-1/2 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-sm transition">
+            Save Link
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- MODAL: ADD NEW SHAREHOLDER -->
+  <div id="addShareholderModal" class="modal-overlay">
+    <div class="modal-content space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="text-base font-extrabold text-slate-800 flex items-center space-x-2.5">
+          <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+            <i class="fas fa-user-plus text-sm"></i>
+          </div>
+          <span>Add New Shareholder</span>
+        </div>
+        <button onclick="closeAddShareholderModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i class="fas fa-times text-base"></i>
+        </button>
+      </div>
+
+      <form onsubmit="submitAddShareholder(event)" class="space-y-3">
+        <div>
+          <label for="newShId" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Share Number *:</label>
+          <div class="relative">
+            <i class="fas fa-id-card absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input type="text" id="newShId" class="input-modern !min-h-[46px]" placeholder="e.g. 1, *1, #1, 2, *18..." required uppercase>
+          </div>
+        </div>
+
+        <div>
+          <label for="newShName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Full Name *:</label>
+          <div class="relative">
+            <i class="fas fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input type="text" id="newShName" class="input-modern !min-h-[46px]" placeholder="e.g. Lakshmibai Siddalingappa Pattanashetti" required>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label for="newShShares" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Shares *:</label>
+            <input type="number" id="newShShares" class="input-modern !min-h-[46px] !pl-4" min="1" max="500" value="1" required>
+          </div>
+
+          <div>
+            <label for="newShType" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Category:</label>
+            <select id="newShType" class="input-modern !min-h-[46px] !pl-3 text-xs">
+              <option value="ಅ - वर्ग">ಅ - वर्ग</option>
+              <option value="ಬ - वर्ग">ಬ - वर्ग</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button type="button" class="w-1/2 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition" onclick="closeAddShareholderModal()">
+            Cancel
+          </button>
+          <button type="submit" id="addShSubmitBtn" class="w-1/2 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition">
+            Save Shareholder
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- MODAL 1: CONFIRMATION MODAL -->
+  <div id="confirmationModal" class="modal-overlay">
+    <div class="modal-content space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="text-base font-extrabold text-slate-800 flex items-center space-x-2.5">
+          <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+            <i class="fas fa-id-card text-sm"></i>
+          </div>
+          <span>Confirm Allotment Slip</span>
+        </div>
+        <button onclick="closeConfirmationModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i class="fas fa-times text-base"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label for="aadhaarNumber" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Aadhaar Number (12 digits):</label>
+          <div class="relative">
+            <i class="fas fa-id-card absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input type="text" id="aadhaarNumber" class="input-modern !min-h-[46px]" placeholder="1234 5678 9012" maxlength="12" pattern="\d{12}" inputmode="numeric">
+          </div>
+        </div>
+
+        <div>
+          <label for="mobileNumber" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Mobile Number (10 digits):</label>
+          <div class="relative">
+            <i class="fas fa-mobile-alt absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input type="text" id="mobileNumber" class="input-modern !min-h-[46px]" placeholder="9876543210" maxlength="10" pattern="\d{10}" inputmode="numeric">
+          </div>
+        </div>
+
+        <div>
+          <label for="amountPaid" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Amount Paid (Rs):</label>
+          <div class="relative">
+            <i class="fas fa-rupee-sign absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input type="number" id="amountPaid" class="input-modern !min-h-[46px]" placeholder="Enter amount paid" min="0" inputmode="decimal">
+          </div>
+          <div id="balanceInfo" class="mt-2 p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-1 font-medium"></div>
+        </div>
+
+        <div class="p-3 bg-emerald-50/80 rounded-xl border border-emerald-200 text-xs text-emerald-950 flex items-center space-x-2">
+          <i class="fas fa-user-check text-emerald-600"></i>
+          <span><strong>Processed By:</strong> <span id="modalProcessedBy">-</span></span>
+        </div>
+      </div>
+
+      <div class="flex gap-2 pt-1">
+        <button class="w-1/2 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition" onclick="closeConfirmationModal()">
+          Cancel
+        </button>
+        <button id="confirmAllotmentBtn" onclick="confirmAllotment()" class="w-1/2 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition">
+          Confirm Slip
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL 3: METHOD MODAL -->
+  <div id="methodModal" class="modal-overlay">
+    <div class="modal-content space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="text-base font-extrabold text-slate-800 flex items-center space-x-2.5">
+          <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+            <i class="fas fa-sliders-h text-sm"></i>
+          </div>
+          <span>Allotment Method</span>
+        </div>
+        <button onclick="closeMethodModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i class="fas fa-times text-base"></i>
+        </button>
+      </div>
+
+      <div class="space-y-2.5">
+        <div class="option-chip" onclick="selectOption(1)">
+          <input type="radio" name="allotmentOption" value="1" class="mr-2 text-blue-600"> 
+          <span>Fixed 25kg per Shareholder</span>
+        </div>
+        <div class="option-chip" onclick="selectOption(2)">
+          <input type="radio" name="allotmentOption" value="2" class="mr-2 text-blue-600"> 
+          <span>25kg per Share (Multiply by Shares)</span>
+        </div>
+        <div class="option-chip" onclick="selectOption(3)">
+          <input type="radio" name="allotmentOption" value="3" class="mr-2 text-blue-600"> 
+          <span>Manual Entry (Custom Quantity)</span>
+        </div>
+      </div>
+
+      <div class="pt-2 flex justify-end">
+        <button onclick="closeMethodModal()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- CENTERED MAIN CONTAINER (max-w-2xl) -->
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 pt-5 sm:pt-7 space-y-4">
+
+    <!-- HEADER BANNER -->
+    <header class="header-banner-bg text-white rounded-3xl p-5 sm:p-6 shadow-xl text-center space-y-3.5 relative">
+      
+      <!-- VERSION CHIP -->
+      <div class="absolute top-3 right-4 bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-extrabold text-blue-100 border border-white/30">
+        v36.0 Live
+      </div>
+
+      <!-- LOGO + TITLE -->
+      <div class="flex items-center justify-center space-x-2.5 pt-1">
+        <i class="fas fa-seedling text-2xl sm:text-3xl text-white"></i>
+        <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-white">Shree Bheemashankar S S K N., Maragur</h1>
+      </div>
+      
+      <!-- SUBTITLE -->
+      <p class="text-blue-100 text-xs sm:text-sm font-medium">Verify Shareholders (Strict Exact Match for 1, *1, #1, 2, *2, #2)</p>
+
+      <!-- 3X2 GRID HEADER CONTROLS BAR -->
+      <div id="mainHeaderActions" class="hidden grid grid-cols-3 gap-2 pt-3 border-t border-white/20 text-xs">
+        
+        <div id="userBadge" class="col-span-1 bg-white/20 backdrop-blur-md px-2 py-2 rounded-xl text-white text-[11px] font-bold border border-white/25 flex items-center justify-center space-x-1 truncate shadow-xs">
+          <i class="fas fa-user-circle text-blue-200 text-xs"></i>
+          <span class="truncate" id="userBadgeName">Cashier 1</span>
+        </div>
+
+        <button type="button" onclick="doLogout()" class="col-span-1 px-2 py-2 bg-rose-500/40 hover:bg-rose-500/60 border border-rose-300/40 rounded-xl font-bold text-[11px] text-white transition flex items-center justify-center space-x-1.5 shadow-xs">
+          <i class="fas fa-sign-out-alt text-xs"></i> <span>Logout</span>
+        </button>
+
+        <button type="button" onclick="openGasConfigModal()" class="col-span-1 px-2 py-2 bg-white/20 hover:bg-white/35 border border-white/30 rounded-xl font-bold text-[11px] text-white transition flex items-center justify-center space-x-1.5 shadow-xs">
+          <i class="fas fa-cog text-xs"></i> <span>Settings</span>
+        </button>
+
+        <button type="button" onclick="startNewAllotment()" class="col-span-1 px-2 py-2 bg-white/20 hover:bg-white/35 border border-white/30 rounded-xl font-bold text-[11px] text-white transition flex items-center justify-center space-x-1.5 shadow-xs truncate">
+          <i class="fas fa-plus text-[10px]"></i> <span class="truncate">New</span>
+        </button>
+
+        <button type="button" onclick="switchNavTab('allotmentsTab')" class="col-span-1 px-2 py-2 bg-white/20 hover:bg-white/35 border border-white/30 rounded-xl font-bold text-[11px] text-white transition flex items-center justify-center space-x-1.5 shadow-xs truncate">
+          <i class="fas fa-list-alt text-[10px]"></i> <span class="truncate">Results</span>
+        </button>
+
+        <button type="button" onclick="openAddShareholderModal()" class="col-span-1 px-2 py-2 bg-emerald-500/40 hover:bg-emerald-500/60 border border-emerald-300/40 rounded-xl font-bold text-[11px] text-white transition flex items-center justify-center space-x-1.5 shadow-xs truncate">
+          <i class="fas fa-user-plus text-[10px]"></i> <span class="truncate">+ Shareholder</span>
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- LOGIN CARD -->
+    <div id="loginCard" class="card-modern active bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+      <div class="flex items-center space-x-3.5 pb-3.5 mb-4 border-b border-slate-100">
+        <div class="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xl shadow-xs">
+          <i class="fas fa-user-shield"></i>
+        </div>
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-800">System Login</h2>
+          <p class="text-xs text-slate-400 font-medium">Verified live against Google Sheet Users tab</p>
+        </div>
+      </div>
+
+      <div class="p-3.5 bg-blue-50/80 rounded-2xl border border-blue-100 text-xs text-blue-950 flex items-center gap-2.5 mb-5 font-medium">
+        <i class="fas fa-info-circle text-blue-600 text-base flex-shrink-0"></i>
+        <span>User credentials & Cashiers are verified directly from Google Sheet (Users tab).</span>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label for="loginUserId" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">User ID / Cashier ID:</label>
+          <div class="relative">
+            <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="loginUserId" class="input-modern" placeholder="e.g. U001 or U002" autocomplete="username" value="U002">
+          </div>
+        </div>
+
+        <div>
+          <label for="loginPassword" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Password:</label>
+          <div class="relative">
+            <i class="fas fa-key absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="password" id="loginPassword" class="input-modern" placeholder="Enter your password" autocomplete="current-password" value="123456">
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button id="loginSubmitBtn" onclick="doLogin()" class="btn-action w-full py-4 bg-blue-500 hover:bg-blue-600 text-white font-extrabold rounded-2xl text-sm shadow-md flex items-center justify-center space-x-2">
+            <i class="fas fa-sign-in-alt"></i> <span>Login & Verify</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- DISTRIBUTION VIEW WRAPPER -->
+    <div id="distributionView" class="space-y-4">
+
+      <!-- ALLOTMENT METHOD BAR -->
+      <div id="adminOptionsWrap" class="hidden">
+        <div class="bg-slate-100/90 p-4 sm:p-5 rounded-2xl border border-slate-200/80 flex items-center justify-between shadow-xs">
+          <div class="flex items-center space-x-3.5">
+            <i class="fas fa-cog text-blue-500 text-xl"></i>
+            <div>
+              <div class="text-[10px] uppercase tracking-wider font-extrabold text-slate-400">ALLOTMENT METHOD</div>
+              <div class="font-extrabold text-slate-800 text-sm sm:text-base" id="methodChipValue">25kg per share</div>
+            </div>
+          </div>
+          <button type="button" onclick="openMethodModal()" class="text-xs font-bold text-blue-500 hover:text-blue-700 flex items-center gap-1 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-xs transition">
+            <i class="fas fa-lock text-[11px]"></i> <span>Change</span>
+          </button>
+        </div>
+      </div>
+
+
+      <!-- STEP 1: VERIFY SHAREHOLDER BY SHARE NUMBER -->
+      <div id="step1" class="card-modern active bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+        <div class="flex items-center space-x-3 pb-4 border-b border-slate-100">
+          <i class="fas fa-id-card text-slate-800 text-xl"></i>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-800">Verify Shareholder by Share Number</h2>
+        </div>
+
+        <div class="space-y-5">
+          <div>
+            <label for="shareholderIdInput" class="block text-xs font-bold text-slate-600 mb-2">Enter Share Number (Column A in Shareholders Tab, e.g. 1, *1, #1):</label>
+            <div class="relative">
+              <i class="fas fa-hashtag absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" id="shareholderIdInput" class="input-modern font-semibold" placeholder="e.g. 1, *1, #1, 2, *18..." value="1" onkeydown="if(event.key==='Enter') verifyShareholder()">
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <button id="verifyBtn" onclick="verifyShareholder()" class="btn-action flex-1 py-4 bg-blue-500 hover:bg-blue-600 text-white font-extrabold rounded-2xl text-sm shadow-md flex items-center justify-center gap-2">
+              <i class="fas fa-search"></i> <span>Verify Share Number</span>
+            </button>
+            <button type="button" onclick="openCameraScannerModal()" class="btn-action flex-1 py-4 bg-violet-600 hover:bg-violet-700 text-white font-extrabold rounded-2xl text-sm shadow-md flex items-center justify-center gap-2">
+              <i class="fas fa-qrcode"></i> <span>Scan with Phone</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- STEP 2: VERIFIED ALLOTMENT SUMMARY -->
+      <div id="step2" class="card-modern bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+        <div class="flex items-center space-x-3.5 pb-4 border-b border-slate-100">
+          <div class="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xl shadow-xs">
+            <i class="fas fa-user-check"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-800">Verified Shareholder Allotment</h2>
+            <p class="text-xs text-slate-400 font-medium">Verified by Share Number against Google Sheet</p>
+          </div>
+        </div>
+
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+          <div class="flex justify-between items-center text-xs sm:text-sm">
+            <span class="text-slate-500 font-semibold">Share Number:</span>
+            <span id="displayShareNo" class="font-bold text-blue-700 font-mono text-sm sm:text-base">-</span>
+          </div>
+          <div class="flex justify-between items-center text-xs sm:text-sm border-t border-slate-200 pt-2">
+            <span class="text-slate-500 font-semibold">Shareholder Name:</span>
+            <span id="displayShareName" class="font-extrabold text-slate-800 text-sm sm:text-base text-right">-</span>
+          </div>
+          <div class="flex justify-between items-center text-xs sm:text-sm border-t border-slate-200 pt-2">
+            <span class="text-slate-500 font-semibold">Share Quantity:</span>
+            <span id="displayShareQty" class="font-bold text-slate-800 font-mono text-sm">-</span>
+          </div>
+        </div>
+
+        <div class="bg-blue-50/80 border-2 border-blue-100 rounded-2xl p-4.5 space-y-1.5">
+          <div id="calculationDetails" class="text-xs sm:text-sm"></div>
+        </div>
+
+        <div id="manualQuantityContainer" class="hidden p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5">
+          <label for="manualQuantityInput" class="block text-xs font-bold text-slate-700 uppercase">Enter Sugar Quantity (kg):</label>
+          <input type="number" id="manualQuantityInput" class="input-modern" min="1" step="1" placeholder="Enter quantity in kg" inputmode="numeric">
+          <div class="text-xs text-slate-500 font-medium">Minimum: 1kg, Maximum: <span id="maxQuantityDisplay" class="font-bold">0</span>kg</div>
+        </div>
+
+        <div id="eligibilityMessage" class="hidden"></div>
+
+        <div class="flex flex-col sm:flex-row gap-3 pt-2 border-t border-slate-100">
+          <button onclick="backToStep1()" class="py-3.5 px-5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs sm:text-sm transition flex items-center justify-center gap-1.5">
+            <i class="fas fa-arrow-left"></i> <span>Back</span>
+          </button>
+          <button id="submitButton" onclick="showConfirmationModal()" class="btn-action flex-1 py-3.5 px-5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-1.5">
+            <i class="fas fa-check"></i> <span>Submit Allotment</span>
+          </button>
+        </div>
+      </div>
+
+
+      <!-- STEP 3: RECEIPT SLIP -->
+      <div id="step3" class="card-modern bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+        <div class="flex items-center space-x-3.5 pb-4 border-b border-slate-100">
+          <div class="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xl shadow-xs">
+            <i class="fas fa-receipt"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-800">Allotment Slip Created</h2>
+            <p class="text-xs text-slate-400 font-medium">Distribution transaction recorded successfully</p>
+          </div>
+        </div>
+
+        <div id="message"></div>
+
+        <div id="receiptDetails" class="hidden bg-emerald-50/80 border border-emerald-200 rounded-2xl p-4.5 text-xs sm:text-sm space-y-1.5">
+          <div><strong>Receipt Number:</strong> <span id="receiptNumberDisplay" class="font-mono text-emerald-800 font-extrabold text-sm sm:text-base"></span></div>
+          <div><strong>Date & Time:</strong> <span id="receiptDate" class="text-slate-600 font-medium"></span></div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 pt-1">
+          <button onclick="switchNavTab('allotmentsTab')" class="py-3.5 px-5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs sm:text-sm transition flex items-center justify-center gap-1.5">
+            <i class="fas fa-list-alt text-blue-600"></i> <span>View Allotment Results</span>
+          </button>
+          <button onclick="startNewAllotment()" class="btn-action flex-1 py-3.5 px-5 bg-blue-500 hover:bg-blue-600 text-white font-extrabold rounded-2xl text-sm shadow-md transition flex items-center justify-center gap-1.5">
+            <i class="fas fa-plus"></i> <span>New Allotment</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ALLOTMENT DETAILS LEDGER TAB VIEW -->
+    <div id="allotmentsTabView" class="card-modern bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xl shadow-xs">
+            <i class="fas fa-table"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-800">Allotment Results & Ledger</h2>
+            <p class="text-xs text-slate-400 font-medium">Live distribution transactions & shareholder unblock manager</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="switchNavTab('distribution')" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition flex items-center gap-1">
+            <i class="fas fa-arrow-left"></i> <span>Back</span>
+          </button>
+          <button onclick="renderAllotmentsLedgerTable()" class="px-3.5 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs rounded-xl border border-blue-200 transition flex items-center gap-1">
+            <i class="fas fa-sync-alt"></i> <span>Refresh</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- LEDGER SUMMARY STATS CARDS -->
+      <div class="grid grid-cols-3 gap-3">
+        <div class="p-3.5 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl text-center space-y-1">
+          <div class="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider">Allotments</div>
+          <div id="statTotalCount" class="text-2xl font-extrabold text-emerald-700">0</div>
+        </div>
+        <div class="p-3.5 bg-blue-50/70 border border-blue-200/80 rounded-2xl text-center space-y-1">
+          <div class="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider">Sugar Distributed</div>
+          <div id="statTotalSugar" class="text-2xl font-extrabold text-blue-700">0 kg</div>
+        </div>
+        <div class="p-3.5 bg-purple-50/70 border border-purple-200/80 rounded-2xl text-center space-y-1">
+          <div class="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider">Revenue</div>
+          <div id="statTotalRevenue" class="text-2xl font-extrabold text-purple-700">Rs 0</div>
+        </div>
+      </div>
+
+      <!-- SEARCH BAR IN LEDGER -->
+      <div class="relative">
+        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+        <input type="text" id="ledgerSearchInput" placeholder="Search Share Number (*1, #1, 1), Name or Receipt Number..." onkeyup="filterLedgerTable()" class="input-modern pl-11">
+      </div>
+
+      <!-- ALLOTMENT TABLE -->
+      <div class="overflow-x-auto border border-slate-200 rounded-2xl shadow-xs bg-white">
+        <table class="w-full text-left text-xs sm:text-sm border-collapse">
+          <thead class="bg-slate-100/90 text-slate-700 font-bold uppercase tracking-wider text-[10px] sm:text-[11px] border-b border-slate-200">
+            <tr>
+              <th class="p-3.5">Receipt #</th>
+              <th class="p-3.5">Share #</th>
+              <th class="p-3.5">Name</th>
+              <th class="p-3.5">Quantity</th>
+              <th class="p-3.5">Total (Rs)</th>
+              <th class="p-3.5">Paid (Rs)</th>
+              <th class="p-3.5 text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody id="allotmentLedgerTableBody" class="divide-y divide-slate-100 font-medium text-slate-800">
+            <tr>
+              <td colspan="7" class="p-6 text-center text-slate-400 font-semibold">Loading allotment details...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    const SPREADSHEET_ID = "1vy1AtjovBDwPNGxBJfE0PvwfddNe7XUK_-tf5X0ychQ";
+    const USERS_GID = "1312157329";
+    const ADMIN_UNBLOCK_PIN = "1207";
+
+    function safeStorageGet(key) {
+      try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+    function safeStorageSet(key, value) {
+      try { localStorage.setItem(key, value); } catch (e) {}
+    }
+    function safeStorageRemove(key) {
+      try { localStorage.removeItem(key); } catch (e) {}
+    }
+
+    function cleanGasUrl(url) {
+      if (!url) return '';
+      url = url.trim();
+      url = url.replace(/\/u\/\d+\//g, '/');
+      return url;
+    }
+
+    let gasApiUrl = cleanGasUrl(safeStorageGet('sat_gas_url') || '');
+
+    function openGasConfigModal() {
+      document.getElementById('gasUrlInput').value = gasApiUrl;
+      document.getElementById('gasConfigModal').style.display = 'flex';
+    }
+
+    function closeGasConfigModal() {
+      document.getElementById('gasConfigModal').style.display = 'none';
+    }
+
+    function saveGasUrl(e) {
+      e.preventDefault();
+      let val = document.getElementById('gasUrlInput').value.trim();
+      gasApiUrl = cleanGasUrl(val);
+      safeStorageSet('sat_gas_url', gasApiUrl);
+      closeGasConfigModal();
+      showAlert('Web App URL saved successfully!', 'success');
+      checkSession();
+    }
+
+    /**
+     * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v36.0
+     * Enforces 100% exact string equality (case-insensitive, whitespace-cleaned).
+     * Typing '1' ONLY matches exact ID '1' (NOT '*1', '#1', '10', '12', etc.).
+     * Typing '*1' ONLY matches exact ID '*1'.
+     * Typing '#1' ONLY matches exact ID '#1'.
+     * Typing '*2' ONLY matches exact ID '*2'.
+     * Typing '#2' ONLY matches exact ID '#2'.
+     * NO partial, contained, or substring matching.
+     */
+    function scoreIdMatch(targetRaw, cellRaw) {
+      if (targetRaw === undefined || targetRaw === null || cellRaw === undefined || cellRaw === null) return 0;
+
+      const targetClean = String(targetRaw).trim().toUpperCase().replace(/[\s\u00A0]+/g, '');
+      const cellClean = String(cellRaw).trim().toUpperCase().replace(/[\s\u00A0]+/g, '');
+
+      if (!targetClean || !cellClean) return 0;
+
+      // 100% Exact string match ONLY
+      if (targetClean === cellClean) return 100;
+
+      return 0;
+    }
+
+    function fetchAllDatabaseRows(sheetName, callback) {
+      if (typeof sheetName === 'function') {
+        callback = sheetName;
+        sheetName = 'Shareholders';
+      }
+      sheetName = sheetName || 'Shareholders';
+
+      const offsets = [0, 5000, 10000, 15000];
+      let combinedRows = [];
+      let completed = 0;
+
+      offsets.forEach(function(offset) {
+        fetchGvizPageWithOffset(offset, sheetName, function(rows) {
+          if (rows && rows.length > 0) {
+            combinedRows = combinedRows.concat(rows);
+          }
+          completed++;
+          if (completed === offsets.length) {
+            callback(combinedRows);
+          }
+        });
+      });
+    }
+
+    function fetchGvizPageWithOffset(offset, sheetName, callback) {
+      const cbName = 'gviz_cb_off_' + offset + '_' + Math.floor(Math.random() * 1000000000);
+      const tqQuery = encodeURIComponent('SELECT * LIMIT 5000 OFFSET ' + offset);
+      let url = 'https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/gviz/tq?tqx=responseHandler:' + cbName;
+      if (sheetName) {
+        url += '&sheet=' + encodeURIComponent(sheetName);
+      }
+      url += '&tq=' + tqQuery + '&nocache=' + Date.now();
+
+      let timer = null;
+      const script = document.createElement('script');
+
+      window[cbName] = function(data) {
+        clearTimeout(timer);
+        if (script.parentNode) script.parentNode.removeChild(script);
+        delete window[cbName];
+
+        let pageRows = [];
+        if (data && data.table && data.table.rows) {
+          data.table.rows.forEach(r => {
+            if (!r || !r.c) return;
+            const rowVals = r.c.map(cell => cell ? (cell.v !== undefined && cell.v !== null ? String(cell.v) : String(cell.f || '')) : '');
+            pageRows.push(rowVals);
+          });
+        }
+        callback(pageRows);
+      };
+
+      script.onerror = function() {
+        clearTimeout(timer);
+        if (script.parentNode) script.parentNode.removeChild(script);
+        delete window[cbName];
+        callback([]);
+      };
+
+      timer = setTimeout(function() {
+        if (window[cbName]) {
+          if (script.parentNode) script.parentNode.removeChild(script);
+          delete window[cbName];
+          callback([]);
+        }
+      }, 6000);
+
+      script.src = url;
+      document.body.appendChild(script);
+    }
+
+    function fetchGvizViaJsonp(sheetNameOrGid, callback) {
+      const cbName = 'gviz_cb_' + Math.floor(Math.random() * 1000000000);
+      let isGid = /^\d+$/.test(String(sheetNameOrGid));
+      
+      let url = 'https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/gviz/tq?tqx=responseHandler:' + cbName + '&nocache=' + Date.now();
+      if (isGid) {
+        url += '&gid=' + sheetNameOrGid;
+      } else {
+        url += '&sheet=' + encodeURIComponent(sheetNameOrGid);
+      }
+
+      let timer = null;
+      const script = document.createElement('script');
+
+      window[cbName] = function(data) {
+        clearTimeout(timer);
+        if (script.parentNode) script.parentNode.removeChild(script);
+        delete window[cbName];
+        callback(data);
+      };
+
+      script.onerror = function() {
+        clearTimeout(timer);
+        if (script.parentNode) script.parentNode.removeChild(script);
+        delete window[cbName];
+        callback(null);
+      };
+
+      timer = setTimeout(function() {
+        if (window[cbName]) {
+          if (script.parentNode) script.parentNode.removeChild(script);
+          delete window[cbName];
+          callback(null);
+        }
+      }, 6000);
+
+      script.src = url;
+      document.body.appendChild(script);
+    }
+
+    function extractUsersFromTable(data) {
+      const users = [];
+      if (!data || !data.table || !data.table.rows) return users;
+
+      const rows = data.table.rows;
+      if (rows.length === 0) return users;
+
+      let idIdx = 0, nameIdx = 1, roleIdx = 2, passIdx = 3;
+      let startRow = 0;
+
+      if (data.table.cols) {
+        data.table.cols.forEach(function(col, j) {
+          if (!col || !col.label) return;
+          const lbl = col.label.toLowerCase().trim();
+          if (lbl.includes('user id') || lbl.includes('userid') || lbl === 'id' || lbl === 'user') idIdx = j;
+          else if (lbl.includes('name')) nameIdx = j;
+          else if (lbl.includes('role')) roleIdx = j;
+          else if (lbl.includes('password') || lbl.includes('pass')) passIdx = j;
+        });
+      }
+
+      if (rows[0] && rows[0].c) {
+        const r0 = rows[0].c;
+        let isHeaderRow = false;
+        for (let j = 0; j < r0.length; j++) {
+          if (!r0[j]) continue;
+          const val = String(r0[j].v !== undefined ? r0[j].v : (r0[j].f || '')).toLowerCase().trim();
+          if (val.includes('user') || val.includes('name') || val.includes('pass') || val.includes('role')) {
+            isHeaderRow = true;
+          }
+          if (val.includes('user id') || val.includes('userid') || val === 'id' || val === 'user') idIdx = j;
+          else if (val.includes('name')) nameIdx = j;
+          else if (val.includes('role')) roleIdx = j;
+          else if (val.includes('password') || val.includes('pass')) passIdx = j;
+        }
+        if (isHeaderRow) startRow = 1;
+      }
+
+      for (let i = startRow; i < rows.length; i++) {
+        const c = rows[i].c;
+        if (!c) continue;
+
+        let cellId = '';
+        if (c[idIdx]) {
+          cellId = c[idIdx].v !== undefined && c[idIdx].v !== null ? String(c[idIdx].v) : String(c[idIdx].f || '');
+        }
+        cellId = cellId.trim();
+        if (!cellId) continue;
+
+        let cellName = c[nameIdx] ? String(c[nameIdx].v !== undefined ? c[nameIdx].v : (c[nameIdx].f || '')) : ('User ' + cellId);
+        let cellRole = c[roleIdx] ? String(c[roleIdx].v !== undefined ? c[roleIdx].v : (c[roleIdx].f || '')) : 'Cashier';
+        let cellPass = c[passIdx] ? String(c[passIdx].v !== undefined && c[passIdx].v !== null ? c[passIdx].v : (c[passIdx].f || '')) : '';
+
+        users.push({
+          id: cellId.toUpperCase(),
+          name: cellName.trim(),
+          role: cellRole.trim(),
+          password: cellPass.trim()
+        });
+      }
+
+      return users;
+    }
+
+    function verifyUserFromGviz(userId, password, callback) {
+      const targetId = String(userId).trim().toUpperCase();
+      const enteredPass = String(password || '').trim();
+
+      if (!targetId) {
+        callback({ success: false, message: 'Please enter User ID.' });
+        return;
+      }
+      if (!enteredPass) {
+        callback({ success: false, message: 'Please enter Password.' });
+        return;
+      }
+
+      fetchGvizViaJsonp('Users', function(data1) {
+        let users = extractUsersFromTable(data1);
+
+        if (users.length > 0) {
+          verifyAgainstUserList(users);
+        } else {
+          fetchGvizViaJsonp(USERS_GID, function(data2) {
+            let users2 = extractUsersFromTable(data2);
+            if (users2.length > 0) {
+              verifyAgainstUserList(users2);
+            } else {
+              fetchGvizViaJsonp('users', function(data3) {
+                let users3 = extractUsersFromTable(data3);
+                if (users3.length > 0) {
+                  verifyAgainstUserList(users3);
+                } else {
+                  callback({ success: false, message: 'Could not load Users tab from Google Sheet ID ' + SPREADSHEET_ID + '.' });
+                }
+              });
+            }
+          });
+        }
+      });
+
+      function verifyAgainstUserList(usersList) {
+        let foundUser = null;
+
+        for (let u of usersList) {
+          if (scoreIdMatch(targetId, u.id) === 100 || u.id.toUpperCase() === targetId) {
+            foundUser = u;
+            break;
+          }
+        }
+
+        if (!foundUser) {
+          callback({ success: false, message: 'User ID "' + userId + '" not found in Users tab.' });
+          return;
+        }
+
+        const expectedPass = String(foundUser.password || '').trim();
+
+        if (!expectedPass) {
+          callback({ success: false, message: 'No password found for User ID "' + userId + '" in Google Sheet.' });
+          return;
+        }
+
+        if (enteredPass !== expectedPass) {
+          callback({ success: false, message: 'Incorrect password for User ID "' + userId + '".' });
+          return;
+        }
+
+        callback({
+          success: true,
+          user: { id: foundUser.id, name: foundUser.name, role: foundUser.role }
+        });
+      }
+    }
+
+    function parseShareholderIdFromQr(text) {
+      if (!text) return '';
+      text = text.trim();
+
+      let match = text.match(/SHARE_NO\s*:\s*([#$&*@!%^+~\-A-Za-z0-9]+)/i);
+      if (match && match[1]) return match[1].trim();
+
+      match = text.match(/(?:SHAREHOLDER_ID|SH_ID|SH_NO|MEMBER_ID|ID)\s*:\s*([#$&*@!%^+~\-A-Za-z0-9]+)/i);
+      if (match && match[1]) return match[1].trim();
+
+      if (text.includes('|')) {
+        const parts = text.split('|');
+        for (let part of parts) {
+          part = part.trim();
+          let m = part.match(/SHARE_NO\s*:\s*([#$&*@!%^+~\-A-Za-z0-9]+)/i) || part.match(/ID\s*:\s*([#$&*@!%^+~\-A-Za-z0-9]+)/i);
+          if (m && m[1]) return m[1].trim();
+        }
+        for (let part of parts) {
+          let trimmed = part.trim();
+          if (trimmed.length >= 1 && trimmed.length <= 15) return trimmed;
+        }
+      }
+
+      if (text.includes('=')) {
+        const parts = text.split('&');
+        for (let p of parts) {
+          if (p.includes('id=') || p.includes('share=')) {
+            return p.split('=').pop().trim();
+          }
+        }
+      }
+
+      return text;
+    }
+
+    let html5QrCodeScanner = null;
+
+    function openCameraScannerModal() {
+      document.getElementById('cameraScannerModal').style.display = 'flex';
+      const statusDiv = document.getElementById('cameraScanStatus');
+      const laserAnim = document.getElementById('qrLaserAnim');
+      statusDiv.innerHTML = '<i class="fas fa-video fa-spin mr-1"></i> Starting live camera...';
+      laserAnim.classList.remove('hidden');
+
+      if (html5QrCodeScanner) {
+        try { html5QrCodeScanner.stop(); } catch(e) {}
+      }
+
+      html5QrCodeScanner = new Html5Qrcode("qrCameraReader");
+      const config = { fps: 15, qrbox: { width: 250, height: 250 } };
+
+      html5QrCodeScanner.start(
+        { facingMode: "environment" },
+        config,
+        onQrScanSuccess,
+        onQrScanFailure
+      ).catch(err => {
+        statusDiv.innerHTML = '<span class="text-rose-600 font-bold"><i class="fas fa-exclamation-triangle"></i> Camera permission denied or not available. Use text entry below.</span>';
+        laserAnim.classList.add('hidden');
+      });
+    }
+
+    function closeCameraScannerModal() {
+      if (html5QrCodeScanner) {
+        try { html5QrCodeScanner.stop(); } catch(e) {}
+        html5QrCodeScanner = null;
+      }
+      document.getElementById('cameraScannerModal').style.display = 'none';
+    }
+
+    function onQrScanSuccess(decodedText) {
+      if (!decodedText) return;
+      closeCameraScannerModal();
+
+      const parsedId = parseShareholderIdFromQr(decodedText);
+      document.getElementById('shareholderIdInput').value = parsedId;
+      showAlert('Scanned Share Number: ' + parsedId, 'success');
+      verifyShareholder();
+    }
+
+    function onQrScanFailure(error) {}
+
+    function switchNavTab(tabName) {
+      const distView = document.getElementById('distributionView');
+      const allView = document.getElementById('allotmentsTabView');
+
+      if (tabName === 'allotmentsTab') {
+        distView.style.display = 'none';
+        allView.style.display = 'block';
+        renderAllotmentsLedgerTable();
+      } else {
+        allView.style.display = 'none';
+        distView.style.display = 'block';
+      }
+    }
+
+    function markShareholderAsReceivedLocal(shId) {
+      if (!shId) return;
+      const rawId = String(shId).trim();
+      let receivedList = JSON.parse(safeStorageGet('sat_received_ids') || '[]');
+      if (!receivedList.includes(rawId)) {
+        receivedList.push(rawId);
+      }
+      safeStorageSet('sat_received_ids', JSON.stringify(receivedList));
+    }
+
+    function isShareholderReceivedLocal(shId) {
+      if (!shId) return false;
+      const receivedList = JSON.parse(safeStorageGet('sat_received_ids') || '[]');
+      for (let rec of receivedList) {
+        // Enforce STRICT EXACT match ONLY
+        if (scoreIdMatch(shId, rec) === 100) return true;
+      }
+
+      const localLedger = JSON.parse(safeStorageGet('sat_local_allotments') || '[]');
+      for (let k = 0; k < localLedger.length; k++) {
+        const itemShId = localLedger[k].shareholderId || localLedger[k].id || '';
+        if (scoreIdMatch(shId, itemShId) === 100) return true;
+      }
+      return false;
+    }
+
+    function unblockShareholderWithPin(shId) {
+      const pin = window.prompt('Enter Admin Security PIN to UNBLOCK Share Number ' + shId + ':');
+      if (pin === null) return;
+      if (pin.trim() !== ADMIN_UNBLOCK_PIN) {
+        showAlert('Incorrect PIN! Unblock request cancelled.', 'error');
+        return;
+      }
+      unblockShareholder(shId);
+    }
+
+    function unblockShareholder(shId) {
+      if (!shId) return;
+      let receivedList = JSON.parse(safeStorageGet('sat_received_ids') || '[]');
+      // Filter out ONLY exact match so unblocking '*1' does not unblock '1' or '#1'
+      receivedList = receivedList.filter(id => scoreIdMatch(shId, id) !== 100);
+      safeStorageSet('sat_received_ids', JSON.stringify(receivedList));
+
+      let localLedger = JSON.parse(safeStorageGet('sat_local_allotments') || '[]');
+      localLedger = localLedger.filter(item => {
+        const itemId = item.shareholderId || item.id || '';
+        return scoreIdMatch(shId, itemId) !== 100;
+      });
+      safeStorageSet('sat_local_allotments', JSON.stringify(localLedger));
+
+      currentShareholder.hasReceived = false;
+      currentShareholder.eligible = true;
+
+      const eligibilityDiv = document.getElementById('eligibilityMessage');
+      const submitBtn = document.getElementById('submitButton');
+
+      if (eligibilityDiv) {
+        eligibilityDiv.className = 'p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs flex items-center space-x-2.5 font-semibold';
+        eligibilityDiv.innerHTML = '<i class="fas fa-check-circle text-emerald-600 text-base"></i> <span><strong>UNBLOCKED!</strong> Share Number ' + shId + ' is now eligible for sugar allotment.</span>';
+      }
+
+      if (submitBtn) submitBtn.disabled = false;
+      showAlert('Share Number ' + shId + ' has been UNBLOCKED!', 'success');
+      renderAllotmentsLedgerTable();
+    }
+
+    function clearAllRestrictionsWithPin() {
+      const pin = window.prompt('Enter Secret Admin Security PIN to Reset ALL Restrictions:');
+      if (pin === null) return;
+      if (pin.trim() !== ADMIN_UNBLOCK_PIN) {
+        showAlert('Incorrect Security PIN!', 'error');
+        return;
+      }
+      safeStorageRemove('sat_received_ids');
+      safeStorageRemove('sat_local_allotments');
+      closeGasConfigModal();
+      showAlert('All claim restrictions reset successfully!', 'success');
+      startNewAllotment();
+      renderAllotmentsLedgerTable();
+    }
+
+    function isAllotmentsSheetResponse(data) {
+      if (!data || !data.table || !data.table.cols) return false;
+      const cols = data.table.cols;
+      let labelCombined = '';
+      for (let c = 0; c < cols.length; c++) {
+        if (cols[c] && cols[c].label) labelCombined += cols[c].label.toLowerCase() + ' ';
+      }
+      return labelCombined.includes('receipt') || labelCombined.includes('amount') || labelCombined.includes('paid');
+    }
+
+    function renderAllotmentsLedgerTable() {
+      const tbody = document.getElementById('allotmentLedgerTableBody');
+      if (!tbody) return;
+
+      const localLedger = JSON.parse(safeStorageGet('sat_local_allotments') || '[]');
+      updateLedgerUI(localLedger, []);
+
+      fetchGvizViaJsonp('Allotments', function(allotData) {
+        let sheetTransactions = [];
+        if (allotData && isAllotmentsSheetResponse(allotData)) {
+          const rows = allotData.table.rows || [];
+          for (let i = 0; i < rows.length; i++) {
+            const c = rows[i].c;
+            if (!c || !c[0]) continue;
+            sheetTransactions.push({
+              receiptNumber: c[0] ? String(c[0].v || '') : '',
+              id: c[1] ? String(c[1].v || '') : '',
+              name: c[2] ? String(c[2].v || '') : '',
+              shares: c[3] ? c[3].v : 1,
+              quantity: c[4] ? c[4].v : 0,
+              totalAmount: c[6] ? c[6].v : 0,
+              amountPaid: c[7] ? c[7].v : 0,
+              date: c[14] ? String(c[14].v || '') : ''
+            });
+          }
+        }
+        updateLedgerUI(localLedger, sheetTransactions);
+      });
+    }
+
+    function updateLedgerUI(localLedger, sheetTransactions) {
+      const tbody = document.getElementById('allotmentLedgerTableBody');
+      if (!tbody) return;
+
+      const map = new Map();
+
+      (sheetTransactions || []).forEach(t => {
+        const key = String(t.receiptNumber || t.id || Math.random());
+        map.set(key, {
+          receiptNumber: t.receiptNumber || 'SLIP-GSHEET',
+          id: t.id || '-',
+          name: t.name || 'Shareholder',
+          quantity: parseFloat(t.quantity) || 0,
+          totalAmount: parseFloat(t.totalAmount) || 0,
+          amountPaid: parseFloat(t.amountPaid) || 0,
+          date: t.date || 'Recorded'
+        });
+      });
+
+      (localLedger || []).forEach(t => {
+        const key = String(t.receiptNumber || t.shareholderId || Math.random());
+        if (!map.has(key)) {
+          map.set(key, {
+            receiptNumber: t.receiptNumber || 'SLIP-LOCAL',
+            id: t.shareholderId || t.id || '-',
+            name: t.receivedBy || t.name || 'Shareholder',
+            quantity: parseFloat(t.quantity) || 0,
+            totalAmount: parseFloat(t.totalAmount) || 0,
+            amountPaid: parseFloat(t.amountPaid) || 0,
+            date: t.date || 'Recent'
+          });
+        }
+      });
+
+      const combined = Array.from(map.values());
+
+      if (combined.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="p-6 text-center text-slate-400 font-semibold"><i class="fas fa-inbox text-3xl mb-2 block text-slate-300"></i> No allotment records found in ledger.</td></tr>';
+        document.getElementById('statTotalCount').textContent = '0';
+        document.getElementById('statTotalSugar').textContent = '0 kg';
+        document.getElementById('statTotalRevenue').textContent = 'Rs 0';
+        return;
+      }
+
+      let totalSugar = 0;
+      let totalRevenue = 0;
+      tbody.innerHTML = '';
+
+      combined.forEach(function(t) {
+        const qty = parseFloat(t.quantity) || 0;
+        const rev = parseFloat(t.totalAmount) || 0;
+        totalSugar += qty;
+        totalRevenue += rev;
+
+        const shId = t.id || '-';
+        const shName = t.name || 'Shareholder';
+        const slipNo = t.receiptNumber || 'SLIP-LOCAL';
+        const paid = t.amountPaid !== undefined ? t.amountPaid : rev;
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-blue-50/50 border-b border-slate-100 transition';
+        tr.innerHTML = 
+          '<td class="p-3.5 font-mono font-bold text-blue-700 text-xs">' + slipNo + '</td>' +
+          '<td class="p-3.5 font-bold text-slate-800">' + shId + '</td>' +
+          '<td class="p-3.5 text-slate-700 font-medium">' + shName + '</td>' +
+          '<td class="p-3.5 font-bold text-emerald-700">' + qty + ' kg</td>' +
+          '<td class="p-3.5 font-semibold">Rs ' + rev + '</td>' +
+          '<td class="p-3.5 text-slate-600">Rs ' + paid + '</td>' +
+          '<td class="p-3.5 text-center">' +
+            '<button type="button" onclick="unblockShareholderWithPin(\'' + shId + '\')" class="px-2.5 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold rounded-lg text-[10px] shadow-xs transition flex items-center justify-center gap-1 mx-auto">' +
+              '<i class="fas fa-unlock text-[9px]"></i> Unblock' +
+            '</button>' +
+          '</td>';
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('statTotalCount').textContent = combined.length;
+      document.getElementById('statTotalSugar').textContent = totalSugar + ' kg';
+      document.getElementById('statTotalRevenue').textContent = 'Rs ' + totalRevenue;
+    }
+
+    function filterLedgerTable() {
+      const q = document.getElementById('ledgerSearchInput').value.toLowerCase();
+      const rows = document.querySelectorAll('#allotmentLedgerTableBody tr');
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    /* ----------------------------------------------------
+       STRICT TARGETED SHAREHOLDER FETCH ENGINE v36.0
+       Enforces 100% exact string equality. Does NOT take contained numbers!
+    ---------------------------------------------------- */
+    function fetchShareholderFromGviz(shareholderId, callback) {
+      const rawTarget = String(shareholderId || '').trim();
+      if (!rawTarget) {
+        callback({ found: false, message: 'Please enter a Share Number.' });
+        return;
+      }
+
+      fetchAllDatabaseRows('Shareholders', function(rows) {
+        if (!rows || rows.length === 0) {
+          fetchAllDatabaseRows('Shareholder', function(fallbackRows) {
+            processShareholderRows(fallbackRows || []);
+          });
+          return;
+        }
+        processShareholderRows(rows);
+      });
+
+      function processShareholderRows(rows) {
+        if (!rows || rows.length === 0) {
+          callback({ found: false, message: 'Could not load Shareholders tab from Google Sheet database.' });
+          return;
+        }
+
+        let idColIdx = 0;
+        let startRow = 0;
+
+        if (rows.length > 0 && rows[0]) {
+          for (let c = 0; c < rows[0].length; c++) {
+            const h = String(rows[0][c] || '').toLowerCase().trim();
+            if (h.includes('shareholder id') || h.includes('share no') || h.includes('sh_id') || h === 'id') {
+              idColIdx = c;
+              startRow = 1;
+              break;
+            }
+          }
+          if (startRow === 0 && (String(rows[0][idColIdx]).toLowerCase().includes('id') || String(rows[0][idColIdx]).toLowerCase().includes('share'))) {
+            startRow = 1;
+          }
+        }
+
+        let exactMatch = null;
+
+        for (let i = startRow; i < rows.length; i++) {
+          const r = rows[i];
+          if (!r || r.length === 0) continue;
+
+          const cellVal = String(r[idColIdx] || r[0] || '').trim();
+          if (!cellVal) continue;
+
+          const score = scoreIdMatch(rawTarget, cellVal);
+
+          if (score === 100) {
+            exactMatch = { row: r, idColIdx: idColIdx, cellVal: cellVal };
+            break; // Found 100% exact match!
+          }
+        }
+
+        if (exactMatch) {
+          const r = exactMatch.row;
+          const matchedIdVal = exactMatch.cellVal;
+
+          let matchedName = String(r[1] || '').trim();
+          let matchedShares = 1;
+
+          if (r[4] !== undefined && r[4] !== null && /^\d+$/.test(String(r[4]).trim())) {
+            matchedShares = parseInt(String(r[4]).trim(), 10);
+          }
+
+          if (!matchedName || /^\d+$/.test(matchedName)) {
+            for (let j = 0; j < r.length; j++) {
+              if (j === exactMatch.idColIdx) continue;
+              const val = String(r[j] || '').trim();
+              if (val && val.length > 1 && !/^\d+$/.test(val)) {
+                matchedName = val;
+                break;
+              }
+            }
+          }
+
+          if (!matchedName) matchedName = 'Shareholder ' + matchedIdVal;
+
+          const hasReceivedInLocal = isShareholderReceivedLocal(matchedIdVal);
+
+          callback({
+            found: true,
+            id: matchedIdVal,
+            name: matchedName,
+            shareQuantity: matchedShares > 0 ? matchedShares : 1,
+            eligible: !hasReceivedInLocal,
+            hasReceived: hasReceivedInLocal
+          });
+        } else {
+          callback({
+            found: false,
+            message: 'Share Number "' + rawTarget + '" not found in Google Sheet Shareholders tab.'
+          });
+        }
+      }
+    }
+
+    function testGasConnection() {
+      const testStatus = document.getElementById('gasTestStatus');
+      testStatus.innerHTML = '<span class="text-blue-600 font-bold"><i class="fas fa-spinner fa-spin mr-1"></i> Querying Google Sheet ID: ' + SPREADSHEET_ID + '...</span>';
+
+      fetchShareholderFromGviz('1', function(res) {
+        if (res && res.found) {
+          testStatus.innerHTML = '<span class="text-emerald-600 font-bold"><i class="fas fa-check-circle mr-1"></i> Connected! Row 1: ' + res.name + '</span>';
+        } else {
+          testStatus.innerHTML = '<span class="text-emerald-600 font-bold"><i class="fas fa-check-circle mr-1"></i> Connected to Google Sheet! ' + (res.message || '') + '</span>';
+        }
+      });
+    }
+
+    function callBackend(fnName, argsArray, successCb, failureCb) {
+      if (typeof google !== 'undefined' && google.script && google.script.run && !window.location.hostname.includes('github.io')) {
+        let runner = google.script.run;
+        if (successCb) runner = runner.withSuccessHandler(successCb);
+        if (failureCb) runner = runner.withFailureHandler(failureCb);
+        runner[fnName].apply(runner, argsArray || []);
+        return;
+      }
+
+      if (fnName === 'getShareholderInfo') {
+        const shId = argsArray ? argsArray[0] : '';
+        fetchShareholderFromGviz(shId, function(res) {
+          if (res && res.found) {
+            if (successCb) successCb(res);
+          } else {
+            if (gasApiUrl && gasApiUrl.startsWith('http')) {
+              tryAppsScriptApi(fnName, argsArray, successCb, function(err) {
+                if (successCb) successCb(res || { found: false, message: 'Share Number "' + shId + '" not found in Google Sheet Shareholders tab.' });
+              });
+            } else {
+              if (successCb) successCb(res || { found: false, message: 'Share Number "' + shId + '" not found in Google Sheet Shareholders tab.' });
+            }
+          }
+        });
+        return;
+      }
+
+      if (gasApiUrl && gasApiUrl.startsWith('http')) {
+        tryAppsScriptApi(fnName, argsArray, successCb, failureCb);
+      } else {
+        if (fnName === 'login') {
+          if (successCb) successCb({ success: true, token: 'SAT-LOCAL-' + Date.now(), id: argsArray[0], name: 'Cashier 1', role: 'Cashier' });
+        } else {
+          if (successCb) successCb({ success: true });
+        }
+      }
+    }
+
+    function tryAppsScriptApi(fnName, argsArray, successCb, failureCb) {
+      const cleanUrl = cleanGasUrl(gasApiUrl);
+      if (!cleanUrl || !cleanUrl.startsWith('http')) {
+        if (failureCb) failureCb({ message: 'No Web App URL configured.' });
+        return;
+      }
+
+      const callbackName = 'gas_cb_' + Math.floor(Math.random() * 1000000000);
+      let queryParams = 'action=' + fnName + '&callback=' + callbackName;
+
+      if (argsArray && argsArray.length > 0) {
+        const paramNames = {
+          'login': ['userId', 'password'],
+          'getShareholderInfo': ['id', 'token'],
+          'addShareholder': ['shData', 'token'],
+          'allotSugar': ['allotmentData'],
+          'getRecentTransactions': ['limit', 'token'],
+          'getCurrentUser': ['token']
+        };
+
+        const names = paramNames[fnName] || [];
+        names.forEach((name, i) => {
+          if (argsArray[i] !== undefined && argsArray[i] !== null) {
+            const val = typeof argsArray[i] === 'object' ? JSON.stringify(argsArray[i]) : argsArray[i];
+            queryParams += '&' + encodeURIComponent(name) + '=' + encodeURIComponent(val);
+          }
+        });
+      }
+
+      const fullUrl = cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + queryParams;
+
+      let handled = false;
+      const script = document.createElement('script');
+
+      const timeoutId = setTimeout(function() {
+        if (!handled) {
+          handled = true;
+          cleanup();
+          tryFetchFallback();
+        }
+      }, 5000);
+
+      function cleanup() {
+        clearTimeout(timeoutId);
+        if (script.parentNode) script.parentNode.removeChild(script);
+        delete window[callbackName];
+      }
+
+      window[callbackName] = function(data) {
+        if (!handled) {
+          handled = true;
+          cleanup();
+          if (successCb) successCb(data);
+        }
+      };
+
+      script.onerror = function() {
+        if (!handled) {
+          handled = true;
+          cleanup();
+          tryFetchFallback();
+        }
+      };
+
+      script.src = fullUrl;
+      document.body.appendChild(script);
+
+      function tryFetchFallback() {
+        const fetchUrl = cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + queryParams.replace(/&callback=gas_cb_\d+/, '');
+        fetch(fetchUrl)
+          .then(res => res.json())
+          .then(data => { if (successCb) successCb(data); })
+          .catch(err => { if (failureCb) failureCb(err); });
+      }
+    }
+
+    let sessionToken = safeStorageGet('sat_token');
+    let currentUser = null;
+
+    let currentShareholder = {
+      id: '', name: '', shareQuantity: 0, eligible: false, hasReceived: false
+    };
+
+    let allotmentConfig = {
+      option: 2, pricePerKg: 20, baseQuantity: 25, minSharesRequired: 1
+    };
+
+    let currentAllotment = { quantity: 0, totalAmount: 0, maxAllowedQuantity: 0 };
+
+    let isBusy = false;
+
+    function showLoading(text) {
+      isBusy = true;
+      document.getElementById('loadingOverlay').style.display = 'flex';
+      document.getElementById('loadingText').textContent = text || 'Please wait...';
+    }
+
+    function hideLoading() {
+      isBusy = false;
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    function setBtnBusy(btn, busy, busyText) {
+      if (!btn) return;
+      if (busy) {
+        if (btn.dataset.busy === '1') return false;
+        btn.dataset.busy = '1';
+        btn.dataset.originalHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="btn-spinner mr-2"></span> ' + (busyText || 'Please wait…');
+        return true;
+      } else {
+        btn.dataset.busy = '0';
+        btn.disabled = false;
+        if (btn.dataset.originalHtml) btn.innerHTML = btn.dataset.originalHtml;
+        return true;
+      }
+    }
+
+    function openAddShareholderModal() {
+      if (!currentUser) {
+        showAlert('Please log in first.', 'error');
+        return;
+      }
+      document.getElementById('addShareholderModal').style.display = 'flex';
+    }
+
+    function closeAddShareholderModal() {
+      document.getElementById('addShareholderModal').style.display = 'none';
+    }
+
+    function submitAddShareholder(e) {
+      e.preventDefault();
+      const id = document.getElementById('newShId').value.trim().toUpperCase();
+      const name = document.getElementById('newShName').value.trim();
+      const shares = parseInt(document.getElementById('newShShares').value, 10) || 1;
+      const memberType = document.getElementById('newShType').value;
+
+      if (!id || !name) {
+        showAlert('Share Number and Full Name are required.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('addShSubmitBtn');
+      if (!setBtnBusy(btn, true, 'Saving…')) return;
+
+      const shData = { id, name, shares, memberType };
+
+      callBackend(
+        'addShareholder',
+        [shData, sessionToken],
+        function(res) {
+          setBtnBusy(btn, false);
+          if (res.sessionExpired) {
+            handleSessionExpired(res.message);
+            return;
+          }
+          if (res.success) {
+            closeAddShareholderModal();
+            showAlert(res.message, 'success');
+            document.getElementById('shareholderIdInput').value = id;
+            verifyShareholder();
+          } else {
+            showAlert(res.message, 'error');
+          }
+        },
+        function(err) {
+          setBtnBusy(btn, false);
+          showAlert('Error adding shareholder: ' + err.message, 'error');
+        }
+      );
+    }
+
+    function checkSession() {
+      if (!sessionToken) {
+        showLoginOnly();
+        return;
+      }
+      const savedUser = safeStorageGet('sat_user_info');
+      currentUser = savedUser ? JSON.parse(savedUser) : null;
+      if (!currentUser) {
+        showLoginOnly();
+        return;
+      }
+      onLoginSuccess();
+    }
+
+    function showLoginOnly() {
+      document.querySelectorAll('.card-modern').forEach(function(c) { c.classList.remove('active'); });
+      document.getElementById('loginCard').classList.add('active');
+      document.getElementById('userBadge').style.display = 'none';
+      document.getElementById('mainHeaderActions').style.display = 'none';
+      document.getElementById('adminOptionsWrap').style.display = 'none';
+      document.getElementById('distributionView').style.display = 'block';
+      document.getElementById('allotmentsTabView').style.display = 'none';
+    }
+
+    function onLoginSuccess() {
+      document.getElementById('loginCard').classList.remove('active');
+      const badgeContainer = document.getElementById('userBadge');
+      if (badgeContainer) badgeContainer.style.display = 'flex';
+      document.getElementById('userBadgeName').textContent = currentUser.name;
+      const actionsContainer = document.getElementById('mainHeaderActions');
+      if (actionsContainer) actionsContainer.style.display = 'grid';
+      document.getElementById('adminOptionsWrap').style.display = 'block';
+      document.getElementById('loginPassword').value = '';
+      showStep('step1');
+    }
+
+    function doLogin() {
+      const btn = document.getElementById('loginSubmitBtn');
+      const userId = document.getElementById('loginUserId').value.trim();
+      const password = document.getElementById('loginPassword').value;
+
+      if (!userId || !password) {
+        showAlert('Please enter User ID and password.', 'error');
+        return;
+      }
+
+      if (!setBtnBusy(btn, true, 'Verifying User…')) return;
+
+      verifyUserFromGviz(userId, password, function(res) {
+        setBtnBusy(btn, false);
+        if (!res.success) {
+          showAlert(res.message || 'Login failed.', 'error');
+          return;
+        }
+
+        sessionToken = 'SAT-LOCAL-' + Date.now();
+        safeStorageSet('sat_token', sessionToken);
+        currentUser = res.user;
+        safeStorageSet('sat_user_info', JSON.stringify(currentUser));
+        
+        showAlert('Logged in as ' + currentUser.name + ' (' + currentUser.role + ')', 'success');
+        onLoginSuccess();
+      });
+    }
+
+    function doLogout() {
+      safeStorageRemove('sat_token');
+      safeStorageRemove('sat_user_info');
+      sessionToken = null;
+      currentUser = null;
+      startNewAllotment();
+      showLoginOnly();
+    }
+
+    function handleSessionExpired(message) {
+      showAlert(message || 'Your session has expired. Please log in again.', 'error');
+      safeStorageRemove('sat_token');
+      safeStorageRemove('sat_user_info');
+      sessionToken = null;
+      currentUser = null;
+      showLoginOnly();
+    }
+
+    function selectOption(option) {
+      allotmentConfig.option = option;
+      safeStorageSet('sat_allotment_option', option);
+
+      document.querySelectorAll('.option-chip').forEach(function(el) { el.classList.remove('selected'); });
+      document.querySelectorAll('input[name="allotmentOption"]').forEach(function(el) { el.checked = (parseInt(el.value, 10) === option); });
+      
+      const selectedRadio = document.querySelector('input[name="allotmentOption"][value="' + option + '"]');
+      if (selectedRadio && selectedRadio.parentElement) {
+        selectedRadio.parentElement.classList.add('selected');
+      }
+
+      const manualQuantityContainer = document.getElementById('manualQuantityContainer');
+      if (option === 3) {
+        manualQuantityContainer.style.display = 'block';
+        updateMaxQuantityDisplay();
+      } else {
+        manualQuantityContainer.style.display = 'none';
+      }
+
+      if (currentShareholder.id) calculateAllotment();
+      renderMethodChip();
+    }
+
+    const METHOD_LOCK_PIN = '1207';
+    const METHOD_LABELS = { 1: 'Fixed 25kg per Shareholder', 2: '25kg per share', 3: 'Manual Custom Entry' };
+
+    function renderMethodChip() {
+      const el = document.getElementById('methodChipValue');
+      if (el) el.textContent = METHOD_LABELS[allotmentConfig.option] || '25kg per share';
+    }
+
+    function openMethodModal() {
+      const pin = window.prompt('Enter Secret PIN to change Allotment Method:');
+      if (pin === null) return;
+      if (pin.trim() !== METHOD_LOCK_PIN) {
+        showAlert('Incorrect PIN.', 'error');
+        return;
+      }
+      document.getElementById('methodModal').style.display = 'flex';
+    }
+
+    function closeMethodModal() { document.getElementById('methodModal').style.display = 'none'; }
+
+    function updateMaxQuantityDisplay() {
+      const maxAllowed = currentAllotment.maxAllowedQuantity;
+      document.getElementById('maxQuantityDisplay').textContent = maxAllowed;
+      document.getElementById('manualQuantityInput').max = maxAllowed;
+    }
+
+    function calculateAllotment() {
+      const shares = currentShareholder.shareQuantity || 0;
+      currentAllotment.maxAllowedQuantity = allotmentConfig.baseQuantity * shares;
+
+      switch (allotmentConfig.option) {
+        case 1: currentAllotment.quantity = allotmentConfig.baseQuantity; break;
+        case 2: currentAllotment.quantity = allotmentConfig.baseQuantity * shares; break;
+        case 3: {
+          const manualInput = document.getElementById('manualQuantityInput');
+          const manualQuantity = parseFloat(manualInput.value) || 0;
+          currentAllotment.quantity = Math.min(manualQuantity > 0 ? manualQuantity : 0, currentAllotment.maxAllowedQuantity);
+          break;
+        }
+        default: currentAllotment.quantity = 0;
+      }
+
+      currentAllotment.totalAmount = currentAllotment.quantity * allotmentConfig.pricePerKg;
+      updateCalculationDisplay();
+      if (allotmentConfig.option === 3) updateMaxQuantityDisplay();
+    }
+
+    function updateCalculationDisplay() {
+      const calculationDiv = document.getElementById('calculationDetails');
+      const shares = currentShareholder.shareQuantity || 0;
+      let calculationHTML = '';
+
+      switch (allotmentConfig.option) {
+        case 1:
+          calculationHTML =
+            '<div class="flex justify-between py-1 border-b border-blue-200/60"><span class="text-slate-500 font-medium">Allotment Rule:</span><span class="font-extrabold text-slate-800">Fixed 25kg per shareholder</span></div>' +
+            '<div class="flex justify-between py-1"><span class="text-slate-500 font-medium">Fixed Sugar Quantity:</span><span class="font-extrabold text-blue-700">' + allotmentConfig.baseQuantity + ' kg</span></div>';
+          break;
+        case 2:
+          calculationHTML =
+            '<div class="flex justify-between py-1 border-b border-blue-200/60"><span class="text-slate-500 font-medium">Allotment Rule:</span><span class="font-extrabold text-slate-800">25kg per share</span></div>' +
+            '<div class="flex justify-between py-1 border-b border-blue-200/60"><span class="text-slate-500 font-medium">Number of Shares:</span><span class="font-extrabold text-slate-800 font-mono">' + shares + '</span></div>' +
+            '<div class="flex justify-between py-1 border-b border-blue-200/60"><span class="text-slate-500 font-medium">Base per Share:</span><span class="font-extrabold text-slate-800">' + allotmentConfig.baseQuantity + ' kg</span></div>' +
+            '<div class="flex justify-between py-1"><span class="text-slate-500 font-medium">Total Sugar Allotment:</span><span class="font-extrabold text-blue-700">' + allotmentConfig.baseQuantity + ' kg × ' + shares + ' = ' + (allotmentConfig.baseQuantity * shares) + ' kg</span></div>';
+          break;
+        case 3:
+          calculationHTML =
+            '<div class="flex justify-between py-1 border-b border-blue-200/60"><span class="text-slate-500 font-medium">Allotment Rule:</span><span class="font-extrabold text-slate-800">Manual Entry</span></div>' +
+            '<div class="flex justify-between py-1 border-b border-blue-200/60"><span class="text-slate-500 font-medium">Max Allowed:</span><span class="font-extrabold text-slate-800">' + currentAllotment.maxAllowedQuantity + ' kg</span></div>' +
+            '<div class="flex justify-between py-1"><span class="text-slate-500 font-medium">Entered Quantity:</span><span class="font-extrabold text-indigo-700">' + currentAllotment.quantity + ' kg</span></div>';
+          break;
+      }
+
+      calculationHTML +=
+        '<div class="flex justify-between py-1 border-t border-blue-200/80 pt-1.5"><span class="text-slate-500 font-medium">Price per kg:</span><span class="font-extrabold text-slate-800">Rs ' + allotmentConfig.pricePerKg + '</span></div>' +
+        '<div class="flex justify-between py-1 text-sm sm:text-base border-t-2 border-blue-300 font-extrabold text-blue-700"><span>Total Payable:</span><span class="font-mono">Rs ' + currentAllotment.totalAmount + '</span></div>';
+
+      calculationDiv.innerHTML = calculationHTML;
+      document.getElementById('amountPaid').value = currentAllotment.totalAmount;
+    }
+
+    function showAlert(message, type) {
+      type = type || 'info';
+      const alertDiv = document.createElement('div');
+      
+      let alertClasses = "p-3.5 rounded-2xl text-xs sm:text-sm font-bold flex items-center space-x-2.5 mb-4 shadow-xs ";
+      let icon = 'fas fa-info-circle';
+      if (type === 'error') {
+        alertClasses += "bg-rose-50 border border-rose-200 text-rose-700";
+        icon = 'fas fa-exclamation-circle';
+      } else if (type === 'success') {
+        alertClasses += "bg-emerald-50 border border-emerald-200 text-emerald-700";
+        icon = 'fas fa-check-circle';
+      } else {
+        alertClasses += "bg-sky-50 border border-sky-200 text-sky-700";
+      }
+
+      alertDiv.className = alertClasses;
+      alertDiv.innerHTML = '<i class="' + icon + ' text-base flex-shrink-0"></i> <span>' + message + '</span>';
+
+      const visibleCard = document.querySelector('.card-modern.active');
+      if (!visibleCard) return;
+      const oldAlerts = visibleCard.querySelectorAll('.alert-dynamic');
+      oldAlerts.forEach(function(a) { a.remove(); });
+
+      alertDiv.classList.add('alert-dynamic');
+      visibleCard.insertBefore(alertDiv, visibleCard.firstChild);
+    }
+
+    function showStep(stepId) {
+      document.querySelectorAll('.card-modern').forEach(function(card) { card.classList.remove('active'); });
+      const target = document.getElementById(stepId);
+      if (target) target.classList.add('active');
+    }
+
+    function refreshBalanceInfo() {
+      const balanceInfo = document.getElementById('balanceInfo');
+      const paid = parseFloat(document.getElementById('amountPaid').value) || 0;
+      const balance = currentAllotment.totalAmount - paid;
+
+      balanceInfo.innerHTML =
+        '<div class="flex justify-between"><span>Total Amount:</span><strong class="text-slate-800 font-mono">Rs ' + currentAllotment.totalAmount + '</strong></div>' +
+        '<div class="flex justify-between"><span>Amount Paid:</span><strong class="text-slate-800 font-mono">Rs ' + paid + '</strong></div>' +
+        '<div class="flex justify-between border-t border-slate-200 pt-1.5 font-extrabold text-xs"><span>Balance Due:</span><strong class="text-blue-700 font-mono">Rs ' + balance + '</strong></div>' +
+        (balance > 0 ?
+          '<div class="text-amber-600 font-bold flex items-center space-x-1 pt-1"><i class="fas fa-clock"></i> <span>Payment Pending</span></div>' :
+          '<div class="text-emerald-600 font-bold flex items-center space-x-1 pt-1"><i class="fas fa-check-circle"></i> <span>Payment Completed</span></div>');
+    }
+
+    function showConfirmationModal() {
+      if (!currentUser) {
+        showAlert('Please log in first.', 'error');
+        return;
+      }
+      document.getElementById('confirmationModal').style.display = 'flex';
+      document.getElementById('aadhaarNumber').value = '';
+      document.getElementById('mobileNumber').value = '';
+      document.getElementById('amountPaid').value = currentAllotment.totalAmount;
+      document.getElementById('modalProcessedBy').textContent = currentUser.name + ' (' + currentUser.id + ')';
+      refreshBalanceInfo();
+    }
+
+    function closeConfirmationModal() { document.getElementById('confirmationModal').style.display = 'none'; }
+
+    function confirmAllotment() {
+      const aadhaarNumber = document.getElementById('aadhaarNumber').value.trim();
+      const mobileNumber = document.getElementById('mobileNumber').value.trim();
+      const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
+
+      if (!aadhaarNumber || aadhaarNumber.length !== 12 || !/^\d+$/.test(aadhaarNumber)) {
+        showAlert('Please enter a valid 12-digit Aadhaar number.', 'error');
+        return;
+      }
+      if (!mobileNumber || !/^[6-9]\d{9}$/.test(mobileNumber)) {
+        showAlert('Please enter a valid 10-digit mobile number.', 'error');
+        return;
+      }
+
+      closeConfirmationModal();
+      processAllotment(aadhaarNumber, mobileNumber, amountPaid);
+    }
+
+    function saveLocalAllotment(allotmentData) {
+      const now = new Date();
+      const receiptNo = 'SLIP-' + Math.floor(now.getTime() / 1000);
+      const dateStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+
+      const record = {
+        success: true,
+        message: 'Sugar Allotment Slip Created!',
+        receiptNumber: receiptNo,
+        shareholderId: allotmentData.shareholder ? allotmentData.shareholder.id : allotmentData.id,
+        quantity: allotmentData.quantity,
+        totalAmount: allotmentData.totalAmount,
+        amountPaid: allotmentData.amountPaid,
+        balance: allotmentData.totalAmount - allotmentData.amountPaid,
+        receivedBy: allotmentData.shareholder ? allotmentData.shareholder.name : 'Shareholder',
+        date: dateStr
+      };
+
+      let ledger = JSON.parse(safeStorageGet('sat_local_allotments') || '[]');
+      ledger.unshift(record);
+      safeStorageSet('sat_local_allotments', JSON.stringify(ledger));
+    }
+
+    function recordSuccessReceipt(result) {
+      showStep('step3');
+      const msg = document.getElementById('message');
+      msg.innerHTML =
+        '<div class="p-4 bg-emerald-50/80 border border-emerald-200 rounded-2xl space-y-1.5 text-xs sm:text-sm text-emerald-950 shadow-xs">' +
+          '<div class="font-extrabold text-base text-emerald-800 flex items-center gap-2"><i class="fas fa-check-circle text-xl text-emerald-600"></i> ' + (result.message || 'Sugar Allotment Recorded Successfully!') + '</div>' +
+          '<div>Quantity: <strong class="text-emerald-900">' + result.quantity + ' kg</strong> | Total: <strong class="text-emerald-900 font-mono">Rs ' + result.totalAmount + '</strong></div>' +
+        '</div>';
+
+      document.getElementById('receiptNumberDisplay').textContent = result.receiptNumber;
+      document.getElementById('receiptDate').textContent = result.date;
+      document.getElementById('receiptDetails').style.display = 'block';
+    }
+
+    function processAllotment(aadhaarNumber, mobileNumber, amountPaid) {
+      showLoading('Recording sugar allotment...');
+
+      const shId = currentShareholder.id;
+      const shName = currentShareholder.name;
+      const shShares = currentShareholder.shareQuantity;
+
+      markShareholderAsReceivedLocal(shId);
+
+      const allotmentData = {
+        shareholder: currentShareholder,
+        aadhaarNumber: aadhaarNumber,
+        mobileNumber: mobileNumber,
+        amountPaid: amountPaid,
+        allotmentOption: allotmentConfig.option,
+        quantity: currentAllotment.quantity,
+        totalAmount: currentAllotment.totalAmount,
+        token: sessionToken
+      };
+
+      saveLocalAllotment(allotmentData);
+
+      if (gasApiUrl && gasApiUrl.startsWith('http')) {
+        const cleanUrl = cleanGasUrl(gasApiUrl);
+        const params = 
+          '?action=allotSugar' +
+          '&shId=' + encodeURIComponent(shId) +
+          '&shName=' + encodeURIComponent(shName) +
+          '&shares=' + encodeURIComponent(shShares) +
+          '&quantity=' + encodeURIComponent(currentAllotment.quantity) +
+          '&totalAmount=' + encodeURIComponent(currentAllotment.totalAmount) +
+          '&amountPaid=' + encodeURIComponent(amountPaid) +
+          '&aadhaar=' + encodeURIComponent(aadhaarNumber) +
+          '&mobile=' + encodeURIComponent(mobileNumber);
+
+        const img = new Image();
+        img.src = cleanUrl + params;
+      }
+
+      hideLoading();
+
+      recordSuccessReceipt({
+        message: 'Sugar Allotment Recorded & Restricted Successfully!',
+        receiptNumber: 'SLIP-' + Math.floor(Date.now() / 1000),
+        quantity: currentAllotment.quantity,
+        totalAmount: currentAllotment.totalAmount,
+        date: new Date().toLocaleString()
+      });
+    }
+
+    function verifyShareholder() {
+      if (!currentUser) {
+        showAlert('Please log in first.', 'error');
+        return;
+      }
+
+      let shareholderId = document.getElementById('shareholderIdInput').value.trim();
+      if (!shareholderId) {
+        showAlert('Please enter Share Number or scan QR code.', 'error');
+        return;
+      }
+
+      const parsedId = parseShareholderIdFromQr(shareholderId);
+      if (parsedId !== shareholderId) {
+        shareholderId = parsedId;
+        document.getElementById('shareholderIdInput').value = parsedId;
+      }
+
+      const btn = document.getElementById('verifyBtn');
+      if (!setBtnBusy(btn, true, 'Verifying…')) return;
+
+      callBackend(
+        'getShareholderInfo',
+        [shareholderId, sessionToken],
+        function(result) {
+          setBtnBusy(btn, false);
+
+          if (!result || !result.found) {
+            showAlert((result && result.message) || 'Share Number "' + shareholderId + '" not found in Google Sheet Shareholders tab.', 'error');
+            return;
+          }
+
+          currentShareholder = {
+            id: result.id || shareholderId,
+            name: result.name,
+            shareQuantity: result.shareQuantity,
+            eligible: result.eligible,
+            hasReceived: result.hasReceived
+          };
+
+          document.getElementById('displayShareNo').textContent = result.id || shareholderId;
+          document.getElementById('displayShareName').textContent = result.name || '-';
+          document.getElementById('displayShareQty').textContent = (result.shareQuantity || 1) + ' Share' + ((result.shareQuantity > 1) ? 's' : '');
+
+          calculateAllotment();
+
+          const eligibilityDiv = document.getElementById('eligibilityMessage');
+          const submitBtn = document.getElementById('submitButton');
+          eligibilityDiv.classList.remove('hidden');
+
+          if (result.hasReceived) {
+            eligibilityDiv.className = 'p-4 bg-rose-50 border-2 border-rose-200 rounded-2xl space-y-3';
+            eligibilityDiv.innerHTML = 
+              '<div class="text-xs text-rose-700 font-bold flex items-center gap-2">' +
+                '<i class="fas fa-ban text-rose-600 text-xl"></i>' +
+                '<span>RESTRICTED: Share Number ' + currentShareholder.id + ' has ALREADY received sugar allotment. Duplicate claim is blocked.</span>' +
+              '</div>' +
+              '<button type="button" onclick="unblockShareholderWithPin(\'' + currentShareholder.id + '\')" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-xs transition">' +
+                '<i class="fas fa-unlock"></i> Click Here to UNBLOCK Share Number ' + currentShareholder.id +
+              '</button>';
+            submitBtn.disabled = true;
+          } else if (!result.eligible) {
+            eligibilityDiv.className = 'p-3.5 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl text-xs flex items-center space-x-2 font-bold';
+            eligibilityDiv.innerHTML = '<i class="fas fa-times-circle text-rose-600 text-base"></i> <span>Not eligible for allotment.</span>';
+            submitBtn.disabled = true;
+          } else {
+            eligibilityDiv.className = 'p-3.5 bg-emerald-50/80 border border-emerald-200 text-emerald-800 rounded-2xl text-xs flex items-center space-x-2 font-bold';
+            eligibilityDiv.innerHTML = '<i class="fas fa-check-circle text-emerald-600 text-base"></i> <span>Shareholder is eligible for sugar allotment.</span>';
+            submitBtn.disabled = false;
+          }
+
+          showStep('step2');
+        },
+        function(err) {
+          setBtnBusy(btn, false);
+          showAlert('Error verifying shareholder: ' + (err && err.message ? err.message : 'Not found in Google Sheet database.'), 'error');
+        }
+      );
+    }
+
+    function backToStep1() { showStep('step1'); }
+
+    function startNewAllotment() {
+      document.getElementById('shareholderIdInput').value = '';
+      currentShareholder = { id: '', name: '', shareQuantity: 0, eligible: false, hasReceived: false };
+      switchNavTab('distribution');
+      showStep('step1');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      selectOption(2);
+      checkSession();
+    });
+  </script>
+</body> 
+</html>
