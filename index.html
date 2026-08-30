@@ -8,11 +8,11 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="theme-color" content="#3B82F6">
-  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v37.0</title>
+  <title>Shree Bheemashankar S S K N., Maragur - Sugar Allotment System v38.0</title>
 
   <script>
     (function() {
-      var BUILD_VERSION = "SAT_V37.0_SESSION_EXPIRED_FIXED_PERMANENTLY";
+      var BUILD_VERSION = "SAT_V38.0_SYMBOL_ID_GVIZ_AND_APPS_SCRIPT_ENGINE";
       try {
         var lastVer = localStorage.getItem("sat_app_build_ver");
         if (lastVer !== BUILD_VERSION) {
@@ -466,7 +466,7 @@
       
       <!-- VERSION CHIP -->
       <div class="absolute top-3 right-4 bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-extrabold text-blue-100 border border-white/30">
-        v37.0 Live
+        v38.0 Live
       </div>
 
       <!-- LOGO + TITLE -->
@@ -799,7 +799,7 @@
     }
 
     /**
-     * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v37.0
+     * STRICT EXACT UNIQUE SHAREHOLDER ID MATCHING ENGINE v38.0
      * Enforces 100% exact string equality (case-insensitive, whitespace-cleaned).
      * Typing '1' ONLY matches exact ID '1' (NOT '*1', '#1', '10', '12', etc.).
      * Typing '*1' ONLY matches exact ID '*1'.
@@ -1376,7 +1376,7 @@
     }
 
     /* ----------------------------------------------------
-       STRICT TARGETED SHAREHOLDER FETCH ENGINE v37.0
+       STRICT TARGETED SHAREHOLDER FETCH ENGINE v38.0
        Enforces 100% exact string equality. Does NOT take contained numbers!
     ---------------------------------------------------- */
     function fetchShareholderFromGviz(shareholderId, callback) {
@@ -1504,11 +1504,27 @@
       if (fnName === 'getShareholderInfo') {
         const shId = argsArray ? argsArray[0] : '';
         fetchShareholderFromGviz(shId, function(res) {
-          if (successCb) {
-            if (res && res.found) {
-              successCb(res);
+          if (res && res.found) {
+            if (successCb) successCb(res);
+          } else {
+            if (gasApiUrl && gasApiUrl.startsWith('http')) {
+              tryAppsScriptApi(fnName, argsArray, function(gasRes) {
+                if (gasRes && gasRes.found) {
+                  if (successCb) successCb(gasRes);
+                } else {
+                  if (successCb) successCb({
+                    found: false,
+                    message: 'Shareholder ID "' + shId + '" not found in Google Sheet database.'
+                  });
+                }
+              }, function(err) {
+                if (successCb) successCb({
+                  found: false,
+                  message: 'Shareholder ID "' + shId + '" not found in Google Sheet database.'
+                });
+              });
             } else {
-              successCb({
+              if (successCb) successCb({
                 found: false,
                 message: 'Shareholder ID "' + shId + '" not found in Google Sheet database.'
               });
